@@ -17,7 +17,7 @@
 # hexadecimal
 sim
 # vsim -c -lib wlib -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L stratixiv_ver -L stratixiv_hssi_ver -L stratixiv_pcie_hip_ver -t 1ps -wlf func.wlf -quiet opt_hp_tb 
-# Start time: 18:07:57 on Mar 15,2023
+# Start time: 18:50:07 on Mar 15,2023
 # ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reconfig_rst_reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/pcie_avmm.v(98).
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst File: /home/sescer/quartus_projects/fpga/src/pcie.sv Line: 63
 # ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'RxStEmpty_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpciexpav_stif_app.v(97).
@@ -410,8 +410,6 @@ sim
 # VERIFICATION START
 #         512 bytes,           0 Kb,           0 Mb
 # VERIFIED
-# ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(131)
+# ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(137)
 #    Time: 163088010 ps  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
-# Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 131
-# End time: 18:09:06 on Mar 15,2023, Elapsed time: 0:01:09
-# Errors: 0, Warnings: 34
+# Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 137

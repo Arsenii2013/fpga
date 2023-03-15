@@ -1,10 +1,10 @@
-module page_selector
+module page_selector // RM BYTEEN
 #(
 	parameter  AW         = 16,
 	parameter  DW         = 64,
 	parameter  MAX_BURST  = 1,
 	parameter  PAGE_COUNT = 4,
-	localparam PCW			 = $clog2(PAGE_COUNT)
+	localparam PCW		  = $clog2(PAGE_COUNT)
 )
 (
 	input logic clock,
@@ -21,26 +21,18 @@ module page_selector
 		 CR     		= 8'h04,
 		 CR_S   		= 8'h08,
 		 CR_C   		= 8'h0C,
-		 PAGE_NUM   = 8'h10
+		 PAGE_NUM       = 8'h10
 	} regs_t;
 
 	enum {IDLE, READ, WRITE} state, next_state;
-	
-	logic [DW-1:0]					  		mask;	
+		
 	logic [AW - UNUSED_BITS - 1:0]	reg_addr = 'h0;
 	
-	logic [BCW-1:0] 						cnt 		= 'h0;
-	logic [BCW-1:0] 						bus_cnt 	= 'h0;
+    logic [BCW-1:0] 				cnt 	 = 'h0;
+	logic [BCW-1:0] 				bus_cnt  = 'h0;
 	
-	logic [DW-1:0]							cr       = 'h0;
-	logic [DW-1:0] 						sr 		= 'h0;
-	
-	genvar i;
-	generate
-	  for (i=0; i < DW/8; i++) begin : MASK_GEN
-			assign mask[i*8 + 7:i*8] = (bus.byteenable[i]) ? 8'hFF : 8'h00;
-	  end
-	endgenerate
+	logic [DW-1:0]					cr       = 'h0;
+	logic [DW-1:0] 					sr 		 = 'h0;
 	
 	assign bus.waitrequest   = (state == IDLE);
 	assign bus.readdatavalid = (state == READ);
@@ -56,35 +48,35 @@ module page_selector
 	
 	always_ff @(posedge clock, posedge reset) begin
 		if(reset) begin
-			state  	<= IDLE;
-			cnt 	 	<= 'h0;
+            state  	 <= IDLE;
+			cnt 	 <= 'h0;
 			bus_cnt  <= 'h0;
 			reg_addr <= 'h0;
 		end else begin
-			state <= next_state;
+			state    <= next_state;
 		
 			case(state) 
 			IDLE: 
 				if(bus.read || bus.write) begin
 					cnt 		<= 'h0;
 					bus_cnt 	<= bus.burstcount;
-					reg_addr <= bus.address;
+					reg_addr    <= bus.address;
 				end
 			READ: begin
-				cnt 		<= cnt+1;
-				reg_addr <= reg_addr+DW/8;
+				cnt 	    <= cnt+1;
+				reg_addr    <= reg_addr+DW/8;
 			end
 			WRITE: 
-				if(bus.write) begin // write may off
+				if(bus.write) begin
 					case(reg_addr) 
-						CR:       	cr          <= (bus.writedata & mask) | (cr & ~mask);
-						CR_S:       cr          <= cr | (bus.writedata & mask);
-						CR_C:       cr          <= cr & ((bus.writedata & mask) | ~mask);
-						PAGE_NUM: 	page_number <= (bus.writedata & mask) | (page_number & ~mask);
+						CR:       	cr          <= bus.writedata;
+						CR_S:       cr          <= cr | bus.writedata;
+						CR_C:       cr          <= cr & bus.writedata;
+						PAGE_NUM: 	page_number <= bus.writedata;
 						default: ;
 					endcase
 					cnt 		<= cnt+1;
-					reg_addr <= reg_addr+DW/8;
+					reg_addr    <= reg_addr+DW/8;
 				end
 			endcase
 		end

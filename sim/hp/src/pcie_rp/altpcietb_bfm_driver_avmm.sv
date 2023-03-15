@@ -52,8 +52,9 @@ task pci_read_long(input int bar, input int addr, output longint data);
     ebfm_barrd_wait(BAR_TABLE_POINTER, bar, addr, RD_BUF_ADDR, 8, 0);
     data = shmem_read(RD_BUF_ADDR, 8);
 endtask
+
 task automatic file_to_mem(input string f_name); 
-	localparam DW 		  	 = 64;
+	localparam DW 		  = 64;
 	localparam PAGE_SIZE  = 128*8/DW; // 128 b
 	localparam PAGE_COUNT = 4;
 	
@@ -63,11 +64,13 @@ task automatic file_to_mem(input string f_name);
 		
 	for (; (i <  PAGE_SIZE*PAGE_COUNT) && !$feof(fd); i++) begin 
 		logic [DW-1:0] to_write;
+        
 		for (int j=0; j < DW/8; j++) begin 
 			status = $fread(to_write[j*8+:8], fd); 
 		end
-		pci_write(0, 8'h10, (i) / PAGE_SIZE);
-		pci_write_long(2, (( i) % PAGE_SIZE) * DW/8, to_write);
+        
+		pci_write(0, 8'h10, i / PAGE_SIZE);
+		pci_write_long(2, (i % PAGE_SIZE) * DW/8, to_write);
 	end
 	
 	$display("%d bytes, %d Kb, %d Mb", i*DW/8, i*DW/8/1024, i*DW/8/1024/1024);
@@ -75,7 +78,7 @@ task automatic file_to_mem(input string f_name);
 endtask
 
 task automatic verify_mem_to_file(input string f_name); 
-	localparam DW 		  	 = 64;
+	localparam DW 		  = 64;
 	localparam PAGE_SIZE  = 128*8/DW; // 128 b
 	localparam PAGE_COUNT = 4;
 	
@@ -86,11 +89,14 @@ task automatic verify_mem_to_file(input string f_name);
 	for (; (i <  PAGE_SIZE*PAGE_COUNT) && !$feof(fd); i++) begin 
 		logic [DW-1:0] from_file;
 		logic [DW-1:0] from_mem;
+        
 		for (int j=0; j <  DW/8; j++) begin 
 			status = $fread(from_file[j*8+:8], fd); 
 		end
+        
 		pci_write(0, 8'h10, (i) / PAGE_SIZE);
 		pci_read_long(2, ((i) % PAGE_SIZE) * DW/8, from_mem);
+        
 		if(from_file != from_mem) begin
 			$display("ERROR: read %d page %d word expected:%h actual:%h", i / PAGE_SIZE, i % PAGE_SIZE, from_file, from_mem);
 		end
