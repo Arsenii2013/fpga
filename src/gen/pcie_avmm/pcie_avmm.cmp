@@ -1,0 +1,111 @@
+	component pcie_avmm is
+		port (
+			clk_clk                      : in  std_logic                     := 'X';             -- clk
+			coreclkout_clk               : out std_logic;                                        -- clk
+			cra_chipselect               : in  std_logic                     := 'X';             -- chipselect
+			cra_address                  : in  std_logic_vector(13 downto 0) := (others => 'X'); -- address
+			cra_byteenable               : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			cra_read                     : in  std_logic                     := 'X';             -- read
+			cra_readdata                 : out std_logic_vector(31 downto 0);                    -- readdata
+			cra_write                    : in  std_logic                     := 'X';             -- write
+			cra_writedata                : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			cra_waitrequest              : out std_logic;                                        -- waitrequest
+			crairq_irq                   : out std_logic;                                        -- irq
+			hip_ctrl_test_in             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- test_in
+			hip_ctrl_simu_mode_pipe      : in  std_logic                     := 'X';             -- simu_mode_pipe
+			hip_pipe_sim_pipe_pclk_in    : in  std_logic                     := 'X';             -- sim_pipe_pclk_in
+			hip_pipe_sim_pipe_rate       : out std_logic_vector(1 downto 0);                     -- sim_pipe_rate
+			hip_pipe_sim_ltssmstate      : out std_logic_vector(4 downto 0);                     -- sim_ltssmstate
+			hip_pipe_eidleinfersel0      : out std_logic_vector(2 downto 0);                     -- eidleinfersel0
+			hip_pipe_powerdown0          : out std_logic_vector(1 downto 0);                     -- powerdown0
+			hip_pipe_rxpolarity0         : out std_logic;                                        -- rxpolarity0
+			hip_pipe_txcompl0            : out std_logic;                                        -- txcompl0
+			hip_pipe_txdata0             : out std_logic_vector(7 downto 0);                     -- txdata0
+			hip_pipe_txdatak0            : out std_logic;                                        -- txdatak0
+			hip_pipe_txdetectrx0         : out std_logic;                                        -- txdetectrx0
+			hip_pipe_txelecidle0         : out std_logic;                                        -- txelecidle0
+			hip_pipe_txswing0            : out std_logic;                                        -- txswing0
+			hip_pipe_txmargin0           : out std_logic_vector(2 downto 0);                     -- txmargin0
+			hip_pipe_txdeemph0           : out std_logic;                                        -- txdeemph0
+			hip_pipe_phystatus0          : in  std_logic                     := 'X';             -- phystatus0
+			hip_pipe_rxdata0             : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- rxdata0
+			hip_pipe_rxdatak0            : in  std_logic                     := 'X';             -- rxdatak0
+			hip_pipe_rxelecidle0         : in  std_logic                     := 'X';             -- rxelecidle0
+			hip_pipe_rxstatus0           : in  std_logic_vector(2 downto 0)  := (others => 'X'); -- rxstatus0
+			hip_pipe_rxvalid0            : in  std_logic                     := 'X';             -- rxvalid0
+			hip_serial_rx_in0            : in  std_logic                     := 'X';             -- rx_in0
+			hip_serial_tx_out0           : out std_logic;                                        -- tx_out0
+			hip_status_derr_cor_ext_rcv  : out std_logic;                                        -- derr_cor_ext_rcv
+			hip_status_derr_cor_ext_rpl  : out std_logic;                                        -- derr_cor_ext_rpl
+			hip_status_derr_rpl          : out std_logic;                                        -- derr_rpl
+			hip_status_dlup_exit         : out std_logic;                                        -- dlup_exit
+			hip_status_ltssmstate        : out std_logic_vector(4 downto 0);                     -- ltssmstate
+			hip_status_ev128ns           : out std_logic;                                        -- ev128ns
+			hip_status_ev1us             : out std_logic;                                        -- ev1us
+			hip_status_hotrst_exit       : out std_logic;                                        -- hotrst_exit
+			hip_status_int_status        : out std_logic_vector(3 downto 0);                     -- int_status
+			hip_status_l2_exit           : out std_logic;                                        -- l2_exit
+			hip_status_lane_act          : out std_logic_vector(3 downto 0);                     -- lane_act
+			hip_status_ko_cpl_spc_header : out std_logic_vector(7 downto 0);                     -- ko_cpl_spc_header
+			hip_status_ko_cpl_spc_data   : out std_logic_vector(11 downto 0);                    -- ko_cpl_spc_data
+			irq_irq                      : in  std_logic_vector(15 downto 0) := (others => 'X'); -- irq
+			irq_rcvr_clk_clk             : in  std_logic                     := 'X';             -- clk
+			irq_rcvr_rst_reset           : in  std_logic                     := 'X';             -- reset
+			m0_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
+			m0_readdata                  : in  std_logic_vector(63 downto 0) := (others => 'X'); -- readdata
+			m0_readdatavalid             : in  std_logic                     := 'X';             -- readdatavalid
+			m0_burstcount                : out std_logic_vector(0 downto 0);                     -- burstcount
+			m0_writedata                 : out std_logic_vector(63 downto 0);                    -- writedata
+			m0_address                   : out std_logic_vector(15 downto 0);                    -- address
+			m0_write                     : out std_logic;                                        -- write
+			m0_read                      : out std_logic;                                        -- read
+			m0_byteenable                : out std_logic_vector(7 downto 0);                     -- byteenable
+			m0_debugaccess               : out std_logic;                                        -- debugaccess
+			m0_clk_clk                   : in  std_logic                     := 'X';             -- clk
+			m0_rst_reset                 : in  std_logic                     := 'X';             -- reset
+			m1_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
+			m1_readdata                  : in  std_logic_vector(63 downto 0) := (others => 'X'); -- readdata
+			m1_readdatavalid             : in  std_logic                     := 'X';             -- readdatavalid
+			m1_burstcount                : out std_logic_vector(3 downto 0);                     -- burstcount
+			m1_writedata                 : out std_logic_vector(63 downto 0);                    -- writedata
+			m1_address                   : out std_logic_vector(16 downto 0);                    -- address
+			m1_write                     : out std_logic;                                        -- write
+			m1_read                      : out std_logic;                                        -- read
+			m1_byteenable                : out std_logic_vector(7 downto 0);                     -- byteenable
+			m1_debugaccess               : out std_logic;                                        -- debugaccess
+			m1_clk_clk                   : in  std_logic                     := 'X';             -- clk
+			m1_rst_reset                 : in  std_logic                     := 'X';             -- reset
+			m2_waitrequest               : in  std_logic                     := 'X';             -- waitrequest
+			m2_readdata                  : in  std_logic_vector(63 downto 0) := (others => 'X'); -- readdata
+			m2_readdatavalid             : in  std_logic                     := 'X';             -- readdatavalid
+			m2_burstcount                : out std_logic_vector(3 downto 0);                     -- burstcount
+			m2_writedata                 : out std_logic_vector(63 downto 0);                    -- writedata
+			m2_address                   : out std_logic_vector(19 downto 0);                    -- address
+			m2_write                     : out std_logic;                                        -- write
+			m2_read                      : out std_logic;                                        -- read
+			m2_byteenable                : out std_logic_vector(7 downto 0);                     -- byteenable
+			m2_debugaccess               : out std_logic;                                        -- debugaccess
+			m2_clk_clk                   : in  std_logic                     := 'X';             -- clk
+			m2_rst_reset                 : in  std_logic                     := 'X';             -- reset
+			npor_npor                    : in  std_logic                     := 'X';             -- npor
+			npor_pin_perst               : in  std_logic                     := 'X';             -- pin_perst
+			nreset_status_reset_n        : out std_logic;                                        -- reset_n
+			reconfig_clk_clk             : in  std_logic                     := 'X';             -- clk
+			reconfig_rst_reset           : in  std_logic                     := 'X';             -- reset
+			refclk_clk                   : in  std_logic                     := 'X';             -- clk
+			reset_reset_n                : in  std_logic                     := 'X';             -- reset_n
+			rxmirq_irq                   : in  std_logic_vector(15 downto 0) := (others => 'X'); -- irq
+			rxmirq_out_irq               : out std_logic_vector(15 downto 0);                    -- irq
+			txs_chipselect               : in  std_logic                     := 'X';             -- chipselect
+			txs_byteenable               : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- byteenable
+			txs_readdata                 : out std_logic_vector(63 downto 0);                    -- readdata
+			txs_writedata                : in  std_logic_vector(63 downto 0) := (others => 'X'); -- writedata
+			txs_read                     : in  std_logic                     := 'X';             -- read
+			txs_write                    : in  std_logic                     := 'X';             -- write
+			txs_burstcount               : in  std_logic_vector(6 downto 0)  := (others => 'X'); -- burstcount
+			txs_readdatavalid            : out std_logic;                                        -- readdatavalid
+			txs_waitrequest              : out std_logic;                                        -- waitrequest
+			txs_address                  : in  std_logic_vector(12 downto 0) := (others => 'X')  -- address
+		);
+	end component pcie_avmm;
+

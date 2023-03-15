@@ -1,0 +1,67 @@
+`timescale 1 ps / 1 ps
+module altpcietb_bfm_driver_avmm #(
+    parameter    TL_BFM_MODE           = 1'b0,    // 0 means full stack RP BFM mode, 1 means TL-only RP BFM (remove CFG accesses to RP internal cfg space)
+    parameter    TL_BFM_RP_CAP_REG     = 32'h42,  // In TL BFM mode, pass PCIE Capabilities reg thru parameter (- there is no RP config space) {specify:  port type, cap version}
+    parameter    TL_BFM_RP_DEV_CAP_REG = 32'h05,  // In TL BFM mode, pass Device Capabilities reg thru parameter (- there is no RP config space) {specify:  maxpayld size}
+    parameter    APPS_TYPE_HWTCL       = 4
+)
+(
+    input  logic clk_in,
+    input  logic rstn,
+    input  logic INTA,
+    input  logic INTB,
+    input  logic INTC,
+    input  logic INTD,
+    output logic dummy_out
+);
+
+//------------------------------------------------
+//
+//		Parameters
+//
+`include "altpcietb_bfm_constants.vh"
+`include "altpcietb_bfm_log.vh"
+`include "altpcietb_bfm_shmem.vh"
+`include "altpcietb_bfm_rdwr.vh"
+`include "altpcietb_bfm_configure.vh"
+
+localparam RD_BUF_ADDR = 1 * (2 ** 16);
+localparam WR_BUF_ADDR = 2 * (2 ** 16);
+
+//------------------------------------------------
+//
+//		Function & Tasks
+//
+task pci_write(input int bar, input int addr, input int data);
+    shmem_write(WR_BUF_ADDR, data, 4);
+    ebfm_barwr(BAR_TABLE_POINTER, bar, addr, WR_BUF_ADDR, 4, 0);
+endtask
+
+task pci_read(input int bar, input int addr, output int data);
+    ebfm_barrd_wait(BAR_TABLE_POINTER, bar, addr, RD_BUF_ADDR, 4, 0);
+    data = shmem_read(RD_BUF_ADDR, 4);
+endtask
+
+//------------------------------------------------
+//
+//  Logic
+//
+always begin : main
+    
+    automatic int res = 0;
+
+    ebfm_cfg_rp_ep(
+        BAR_TABLE_POINTER, // BAR Size/Address info for Endpoint
+        1,                 // Bus Number for Endpoint Under Test
+        1,                 // Device Number for Endpoint Under Test
+        512,               // Maximum Read Request Size for Root Port
+        1,                 // Display EP Config Space after setup
+        0                  // Do not limit the BAR assignments to 4GB address map
+    );
+
+    #100us
+
+    $stop();
+end
+
+endmodule // altpcietb_bfm_driver_avmm

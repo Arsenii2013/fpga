@@ -1,0 +1,100 @@
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|pcie_avmm_mm_interconnect_2:mm_interconnect_2|altera_merlin_burst_adapter:mm_clock_crossing_bridge_2_s0_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|pcie_avmm_mm_interconnect_1:mm_interconnect_1|altera_merlin_burst_adapter:mm_clock_crossing_bridge_1_s0_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|pcie_avmm_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:mm_clock_crossing_bridge_0_s0_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|altpcie_cv_hip_avmm_hwtcl:pcie_cv_hip_avmm_0|altpciexpav_stif_app:avalon_bridge|altpciexpav_stif_control_register:cntrl_reg|altpciexpav_stif_cr_avalon:i_avalon|avalon_state_reg
+Name avalon_state_reg.CRA_PIPE avalon_state_reg.CRA_READ_ACK avalon_state_reg.CRA_READ_WAIT avalon_state_reg.CRA_READ_FIRST avalon_state_reg.CRA_WRITE_ACK avalon_state_reg.CRA_IDLE 
+avalon_state_reg.CRA_IDLE 0 0 0 0 0 0 
+avalon_state_reg.CRA_WRITE_ACK 0 0 0 0 1 1 
+avalon_state_reg.CRA_READ_FIRST 0 0 0 1 0 1 
+avalon_state_reg.CRA_READ_WAIT 0 0 1 0 0 1 
+avalon_state_reg.CRA_READ_ACK 0 1 0 0 0 1 
+avalon_state_reg.CRA_PIPE 1 0 0 0 0 1 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|altpcie_cv_hip_avmm_hwtcl:pcie_cv_hip_avmm_0|altpciexpav_stif_app:avalon_bridge|altpciexpav_stif_tx:tx|altpciexpav_stif_tx_cntrl:tx_cntrl|txrp_state
+Name txrp_state.TXRP_RESET txrp_state.TXRP_WAIT txrp_state.TXRP_STREAM txrp_state.TXRP_FIFO_PREFETCH1 txrp_state.TXRP_FIFO_PREFETCH0 txrp_state.TXRP_IDLE 
+txrp_state.TXRP_IDLE 0 0 0 0 0 0 
+txrp_state.TXRP_FIFO_PREFETCH0 0 0 0 0 1 1 
+txrp_state.TXRP_FIFO_PREFETCH1 0 0 0 1 0 1 
+txrp_state.TXRP_STREAM 0 0 1 0 0 1 
+txrp_state.TXRP_WAIT 0 1 0 0 0 1 
+txrp_state.TXRP_RESET 1 0 0 0 0 1 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|alt_xcvr_reconfig:alt_xcvr_reconfig_0|alt_xcvr_reconfig_offset_cancellation:offset.sc_offset|alt_xcvr_reconfig_offset_cancellation_av:offset_cancellation_av|state
+Name state.RELEASE_PHY_RESET_OVERRIDE_START_STATE state.RELEASE_PHY_RESET_OVERRIDE_DATA_STATE state.RELEASE_PHY_RESET_OVERRIDE_ADDR_STATE state.SET_PHY_RESET_OVERRIDE_START_STATE state.SET_PHY_RESET_OVERRIDE_DATA_STATE state.SET_PHY_RESET_OVERRIDE_ADDR_STATE state.RELEASE_OC_CALEN_DONE_STATE state.RELEASE_OC_CALEN_START_STATE state.RELEASE_OC_CALEN_DATA_STATE state.START_OC_CALEN_STATE state.SET_OC_CALEN_DATA_STATE state.SET_OC_CALEN_ADDR_STATE state.GET_TESTBUS_DATA_STATE state.GET_TESTBUS_ADDR_STATE state.WAIT_FOR_NEXT_STATE state.RELEASE_PMUTEX_STATE state.CHECK_PMUTEX_STATE state.READ_PMUTEX_STATE state.ACQUIRE_PMUTEX_STATE state.WRITE_DONE_STATE state.READ_DATA_STATE state.ADDRESS_OFFSET_STATE state.CHECK_REQ_DATA_STATE state.READ_REQ_DATA_STATE state.REQUEST_CONTROL_STATE state.SET_ADDR_OFFSET_REQ_STATE state.CHECK_PHY_ADDR_STATE state.READ_PHY_ADDR_STATE state.BUSY_STATE state.CONTROL_STATE state.WRITE_DATA_STATE state.LOGICAL_ADDRESS_STATE state.000000 
+state.000000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.LOGICAL_ADDRESS_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.WRITE_DATA_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.CONTROL_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.BUSY_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.READ_PHY_ADDR_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.CHECK_PHY_ADDR_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.SET_ADDR_OFFSET_REQ_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.REQUEST_CONTROL_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.READ_REQ_DATA_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.CHECK_REQ_DATA_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.ADDRESS_OFFSET_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_DATA_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.WRITE_DONE_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.ACQUIRE_PMUTEX_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_PMUTEX_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.CHECK_PMUTEX_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_PMUTEX_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.WAIT_FOR_NEXT_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.GET_TESTBUS_ADDR_STATE 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.GET_TESTBUS_DATA_STATE 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.SET_OC_CALEN_ADDR_STATE 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.SET_OC_CALEN_DATA_STATE 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.START_OC_CALEN_STATE 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_OC_CALEN_DATA_STATE 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_OC_CALEN_START_STATE 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_OC_CALEN_DONE_STATE 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.SET_PHY_RESET_OVERRIDE_ADDR_STATE 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.SET_PHY_RESET_OVERRIDE_DATA_STATE 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.SET_PHY_RESET_OVERRIDE_START_STATE 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_PHY_RESET_OVERRIDE_ADDR_STATE 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_PHY_RESET_OVERRIDE_DATA_STATE 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.RELEASE_PHY_RESET_OVERRIDE_START_STATE 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|alt_xcvr_reconfig:alt_xcvr_reconfig_0|alt_xcvr_reconfig_offset_cancellation:offset.sc_offset|alt_xcvr_reconfig_offset_cancellation_av:offset_cancellation_av|alt_cal_av:alt_cal_inst|ret_state
+Name ret_state.PDOF_TEST_RD ret_state.CH_ADV ret_state.DPRIO_WAIT ret_state.CAL_PD_WR ret_state.IDLE ret_state.PDOF_TEST_WR 
+ret_state.IDLE 0 0 0 0 0 0 
+ret_state.CAL_PD_WR 0 0 0 1 1 0 
+ret_state.DPRIO_WAIT 0 0 1 0 1 0 
+ret_state.CH_ADV 0 1 0 0 1 0 
+ret_state.PDOF_TEST_RD 1 0 0 0 1 0 
+ret_state.PDOF_TEST_WR 0 0 0 0 1 1 
+
+State Machine - |hp|pcie_m:pcie|pcie_avmm:pcie_avmm_inst|alt_xcvr_reconfig:alt_xcvr_reconfig_0|alt_xcvr_reconfig_offset_cancellation:offset.sc_offset|alt_xcvr_reconfig_offset_cancellation_av:offset_cancellation_av|alt_cal_av:alt_cal_inst|state
+Name state.PDOF_TEST_RD state.DPRIO_WRITE state.DPRIO_READ state.CH_ADV state.TEST_INPUT state.SAMPLE_TB state.DPRIO_WAIT state.CAL_PD_WR state.CHECK_PLL_RD state.TESTBUS_SET state.CH_WAIT state.IDLE state.PDOF_TEST_WR 
+state.IDLE 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.CH_WAIT 0 0 0 0 0 0 0 0 0 0 1 1 0 
+state.TESTBUS_SET 0 0 0 0 0 0 0 0 0 1 0 1 0 
+state.CHECK_PLL_RD 0 0 0 0 0 0 0 0 1 0 0 1 0 
+state.CAL_PD_WR 0 0 0 0 0 0 0 1 0 0 0 1 0 
+state.DPRIO_WAIT 0 0 0 0 0 0 1 0 0 0 0 1 0 
+state.SAMPLE_TB 0 0 0 0 0 1 0 0 0 0 0 1 0 
+state.TEST_INPUT 0 0 0 0 1 0 0 0 0 0 0 1 0 
+state.CH_ADV 0 0 0 1 0 0 0 0 0 0 0 1 0 
+state.DPRIO_READ 0 0 1 0 0 0 0 0 0 0 0 1 0 
+state.DPRIO_WRITE 0 1 0 0 0 0 0 0 0 0 0 1 0 
+state.PDOF_TEST_RD 1 0 0 0 0 0 0 0 0 0 0 1 0 
+state.PDOF_TEST_WR 0 0 0 0 0 0 0 0 0 0 0 1 1 

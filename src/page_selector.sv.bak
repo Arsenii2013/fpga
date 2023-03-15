@@ -1,0 +1,88 @@
+module page_selector
+#(
+	parameter  AW         = 16,
+	parameter  DW         = 64,
+	parameter  MAX_BURST  = 1,
+	parameter  PAGE_COUNT = 4,
+	localparam PCW			 = $clog2(PAGE_COUNT)
+)
+(
+	input logic clock,
+	input logic reset,
+	avmm_if.slave bus,
+	
+	output logic [PCW-1:0] page_number
+);	
+	localparam MEM_SIZE 	   = 1;
+	localparam BCW 			= $clog2(MAX_BURST);
+	localparam UNUSED_BITS  = $clog2(DW/8);
+	
+	enum {IDLE, READ, WRITE} state, next_state;
+	
+	logic [DW-1:0]					  		mask;	
+	logic 									reg_addr_overflow;
+	logic [AW - UNUSED_BITS - 1:0]	reg_addr = 'h0;
+	logic [MEM_SIZE-1:0][DW-1:0] 		memory 	= '{default:'h0};
+	logic [BCW-1:0] 						cnt 		= 'h0;
+	logic [BCW-1:0] 						bus_cnt 	= 'h0;
+	
+	genvar i;
+	generate
+	  for (i=0; i < DW/8; i++) begin : MASK_GEN
+			assign mask[i*8 + 7:i*8] = (bus.byteenable[i]) ? 8'hFF : 8'h00;
+	  end
+	endgenerate
+	
+	assign bus.waitrequest   = (state == IDLE);
+	assign bus.readdatavalid = (state == READ);
+	assign bus.readdata 		 = (!reg_addr_overflow) ? memory[reg_addr] : 'hDEAD; 
+	assign reg_addr_overflow = (reg_addr > MEM_SIZE - 1);
+	assign page_number 		 = memory[0][PCW-1:0];
+	always_ff @(posedge clock, posedge reset) begin
+		if(reset) begin
+			state  	<= IDLE;
+			cnt 	 	<= 'h0;
+			bus_cnt  <= 'h0;
+			reg_addr <= 'h0;
+			memory 	<= '{default:'h0};
+		end else begin
+			state <= next_state;
+		
+			case(state) 
+			IDLE: 
+				if(bus.read || bus.write) begin
+					cnt 		<= 'h0;
+					bus_cnt 	<= bus.burstcount;
+					reg_addr <= bus.address[AW - 1:UNUSED_BITS];
+				end
+			READ: begin
+				cnt 		<= cnt+1;
+				reg_addr <= reg_addr+1;
+			end
+			WRITE: 
+				if(bus.write) begin // write may off
+					if(!reg_addr_overflow)
+						memory[reg_addr] <= (bus.writedata & mask) | (memory[reg_addr] & ~mask);
+					cnt 		<= cnt+1;
+					reg_addr <= reg_addr+1;
+				end
+			endcase
+		end
+	end
+	
+	always_comb begin
+		case(state) 
+		IDLE: begin
+			if(bus.write || bus.read)
+				next_state = (bus.write) ? WRITE : READ;
+			else 
+				next_state = IDLE;
+		end
+		READ:
+			next_state = (cnt == bus_cnt - 1) ? IDLE : READ;
+		WRITE:
+			next_state = (cnt == bus_cnt - 1) ? IDLE : WRITE;
+		endcase
+	end
+	
+endmodule

@@ -1,0 +1,417 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# do qs.tcl
+# hp_tb
+# hexadecimal
+sim
+# vsim -c -lib wlib -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L stratixiv_ver -L stratixiv_hssi_ver -L stratixiv_pcie_hip_ver -t 1ps -wlf func.wlf -quiet opt_hp_tb 
+# Start time: 18:07:57 on Mar 15,2023
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reconfig_rst_reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/pcie_avmm.v(98).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst File: /home/sescer/quartus_projects/fpga/src/pcie.sv Line: 63
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'RxStEmpty_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpciexpav_stif_app.v(97).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_cv_hip_avmm_hwtcl.v Line: 2143
+# ** Warning: (vsim-3015) [PCDPC] - Port size (132) does not match connection size (131) for port 'RxRpFifoWrData_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_control_register.v(113).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/genblk6/cntrl_reg File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpciexpav_stif_app.v Line: 700
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (32) for port 'cg_num_mailbox_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_cr_mailbox.v(93).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/genblk6/cntrl_reg/i_a2p_mb File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_control_register.v Line: 226
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (32) for port 'cg_num_mailbox_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_cr_mailbox.v(93).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/genblk6/cntrl_reg/i_p2a_mb File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_control_register.v Line: 246
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (32) for port 'cg_num_a2p_mailbox_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_cr_interrupt.v(108).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/genblk6/cntrl_reg/i_interrupt File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_control_register.v Line: 267
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (32) for port 'cg_num_p2a_mailbox_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_cr_interrupt.v(109).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/genblk6/cntrl_reg/i_interrupt File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_control_register.v Line: 267
+# ** Warning: (vsim-3015) [PCDPC] - Port size (66) does not match connection size (74) for port 'q_b'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/altera_mf.v(47613).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/rx/genblk2/cpl_ram File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_rx.v Line: 428
+# ** Warning: (vsim-3015) [PCDPC] - Port size (4) does not match connection size (1) for port 'RxStErr_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_rx_cntrl.v(49).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/rx/rx_pcie_cntrl File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_rx.v Line: 193
+# ** Warning: (vsim-3015) [PCDPC] - Port size (66) does not match connection size (74) for port 'CplBufData_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_rx_resp.v(37).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/rx/rxavl_resp File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_rx.v Line: 373
+# ** Warning: (vsim-3015) [PCDPC] - Port size (7) does not match connection size (9) for port 'address_a'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/altera_mf.v(47598).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/genblk3/tx_cpl_buff File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 485
+# ** Warning: (vsim-3015) [PCDPC] - Port size (7) does not match connection size (9) for port 'address_b'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/altera_mf.v(47599).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/genblk3/tx_cpl_buff File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 485
+# ** Warning: (vsim-3015) [PCDPC] - Port size (6) does not match connection size (7) for port 'usedw'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/altera_mf.v(51682).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/genblk2/rd_bypass_fifo File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 423
+# ** Warning: (vsim-3015) [PCDPC] - Port size (7) does not match connection size (9) for port 'CplRamWrAddr_o'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_txresp_cntrl.v(49).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/txresp File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 313
+# ** Warning: (vsim-3015) [PCDPC] - Port size (98) does not match connection size (99) for port 'CmdFifoDat_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx_cntrl.v(54).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/tx_cntrl File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 534
+# ** Warning: (vsim-3015) [PCDPC] - Port size (98) does not match connection size (99) for port 'RdBypassFifoDat_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx_cntrl.v(62).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/genblk1/avalon_bridge/tx/tx_cntrl File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/avalon_stif/altpciexpav_stif_tx.v Line: 534
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (2) for port 'tx_st_empty'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_cv_hip_ast_hwtcl.v(894).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_cv_hip_avmm_hwtcl.v Line: 1840
+# ** Warning: (vsim-3015) [PCDPC] - Port size (350) does not match connection size (140) for port 'reconfig_to_xcvr'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v(813).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_cv_hip_ast_hwtcl.v Line: 1734
+# ** Warning: (vsim-3015) [PCDPC] - Port size (230) does not match connection size (92) for port 'reconfig_from_xcvr'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v(815).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_cv_hip_ast_hwtcl.v Line: 1734
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'hipextraclkin'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(903).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v Line: 3157
+# ** Warning: (vsim-3015) [PCDPC] - Port size (30) does not match connection size (1) for port 'hipextrain'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(904).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v Line: 3157
+# ** Warning: (vsim-3015) [PCDPC] - Port size (8) does not match connection size (1) for port 'flr_sts'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(1041).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v Line: 3157
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'hipextraclkout'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(1092).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v Line: 3157
+# ** Warning: (vsim-3015) [PCDPC] - Port size (30) does not match connection size (1) for port 'hipextraout'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(1093).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_ast_hwtcl.v Line: 3157
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (5) for port 'err_dll'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v(6283).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_cavhip/genblk1/cyclonev_hd_altpe2_hip_top_simu_only_dump File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v Line: 2572
+# ** Warning: (vsim-3015) [PCDPC] - Port size (140) does not match connection size (350) for port 'reconfig_to_xcvr'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_pipe_native_hip.sv(156).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v Line: 5899
+# ** Warning: (vsim-3015) [PCDPC] - Port size (92) does not match connection size (230) for port 'reconfig_from_xcvr'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_pipe_native_hip.sv(160).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpcie_av_hip_128bit_atom.v Line: 5899
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'rxfreqtxcmuplllock'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_emsip_adapter.sv(94).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/av_xcvr_emsip_adapter_inst File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_pipe_native_hip.sv Line: 474
+# ** Warning: (vsim-3015) [PCDPC] - Port size (44) does not match connection size (64) for port 'in_pld_tx_data'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_native.sv(415).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_pipe_native_hip.sv Line: 885
+# ** Warning: (vsim-3015) [PCDPC] - Port size (20) does not match connection size (80) for port 'tx_datain'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_pma.sv(77).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native/inst_av_pma File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_xcvr_native.sv Line: 628
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (3) for port 'pclkxnup'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/cyclonev_hssi_atoms.v(7153).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native/inst_av_pma/genblk2/av_tx_pma/tx_pma_insts[0]/av_tx_pma_ch_inst/tx_pma_ch/tx_cgb File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_tx_pma_ch.sv Line: 316
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (3) for port 'pclkout'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/cyclonev_hssi_atoms.v(7169).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native/inst_av_pma/genblk2/av_tx_pma/tx_pma_insts[0]/av_tx_pma_ch_inst/tx_pma_ch/tx_cgb File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_tx_pma_ch.sv Line: 316
+# ** Warning: (vsim-3015) [PCDPC] - Port size (80) does not match connection size (20) for port 'dout'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/cyclonev_hssi_atoms.v(6899).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native/inst_av_pma/genblk1/av_rx_pma/rx_pmas[0]/rx_pma/rx_pma_deser File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_rx_pma.sv Line: 285
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'in'. The port definition is at: /home/sescer/quartus_projects/fpga/lib/common/pf.sv(11).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/rst_pf File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 140
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.refclk_to_250mhz.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.refclk_to_250mhz.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 250.0 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 2000.000000
+# Info: output_clock_low_period = 2000.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.pll_100mhz_to_500mhz.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.pll_100mhz_to_500mhz.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 500.0 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 1000.000000
+# Info: output_clock_low_period = 1000.000000
+# Running PIPE simulation - bypassing transceiver - 32-bit pipe interface
+# Warning: Cyclone V device family does not support aclr signal on input ports. The aclr to input ports will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_a2p_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for indata_aclr_a is not supported in Cyclone V device family. The aclr to data_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_a2p_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for wrcontrol_aclr_a is not supported in Cyclone V device family. The aclr to write control registers of port A will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_a2p_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: NONE value for address_aclr_a is not supported for write port in Cyclone V device family. The aclr to address_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_a2p_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for byteena_aclr_b is not supported in Cyclone V device family. The aclr to byteena_a register will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_a2p_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: Cyclone V device family does not support aclr signal on input ports. The aclr to input ports will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_p2a_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for indata_aclr_a is not supported in Cyclone V device family. The aclr to data_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_p2a_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for wrcontrol_aclr_a is not supported in Cyclone V device family. The aclr to write control registers of port A will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_p2a_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: NONE value for address_aclr_a is not supported for write port in Cyclone V device family. The aclr to address_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_p2a_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for byteena_aclr_b is not supported in Cyclone V device family. The aclr to byteena_a register will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.genblk6.cntrl_reg.i_p2a_mb.genblk1.altsyncram_component.m_default.altsyncram_inst
+# Warning: Cyclone V device family does not support aclr signal on input ports. The aclr to input ports will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for indata_aclr_a is not supported in Cyclone V device family. The aclr to data_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR0 value for wrcontrol_aclr_a is not supported in Cyclone V device family. The aclr to write control registers of port A will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: NONE value for address_aclr_a is not supported for write port in Cyclone V device family. The aclr to address_a registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR1 value for indata_aclr_b is not supported in Cyclone V device family. The aclr to data_b registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR1 value for wrcontrol_aclr_b is not supported in Cyclone V device family. The aclr to write control registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR1 value for byteena_aclr_b is not supported in Cyclone V device family. The aclr to byteena_a register will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Warning: CLEAR1 value for address_aclr_b is not supported for write port in Cyclone V device family. The aclr to address_b registers will be ignored.
+# Time: 0  Instance: hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.genblk1.avalon_bridge.tx.a2p_addr_trans.genblk1.vartrans.altsyncram_component.m_default.altsyncram_inst
+# Cyclone V Hard IP for PCI Express  
+# Info: ======================================================================================================================================
+# Info:                                                                                                
+# Info:    Module        : arriav_hd_altpe2_hip_top_simu_only_dump                                            
+# Info:    Description   : Access point to a subset of internal PCI Express Hard IP data link layer signals            
+# Info:    Instance Path : hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_cavhip.genblk1.cyclonev_hd_altpe2_hip_top_simu_only_dump
+# Info:                                                                                                
+# Info: ======================================================================================================================================
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.av_xcvr_tx_pll_inst.pll[0].pll.cmu_pll.tx_pll.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.av_xcvr_tx_pll_inst.pll[0].pll.cmu_pll.tx_pll.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 2500 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 200.000000
+# Info: output_clock_low_period = 200.000000
+# Info: =================================================
+# Info:           Generic CDR Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 2500.000000 MHz
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.inst_cdr_clk0_pcie_00.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.inst_cdr_clk0_pcie_00.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 2500.000000 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 200.000000
+# Info: output_clock_low_period = 200.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME0.inst_cdr_clk0_pcie_01.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME0.inst_cdr_clk0_pcie_01.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 800 ps
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 400.000000
+# Info: output_clock_low_period = 400.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME1.inst_cdr_clk0_pcie_11.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME1.inst_cdr_clk0_pcie_11.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 4000.000000 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 125.000000
+# Info: output_clock_low_period = 125.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.inst_cdr_clk90_pcie_00.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.inst_cdr_clk90_pcie_00.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 2500.000000 MHz
+# Info: phase_shift = 100 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 200.000000
+# Info: output_clock_low_period = 200.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME2.inst_cdr_clk90_pcie_01.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME2.inst_cdr_clk90_pcie_01.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 800 ps
+# Info: phase_shift = 200 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 400.000000
+# Info: output_clock_low_period = 400.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME3.inst_cdr_clk90_pcie_11.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.g_pcie_xcvr.genblk1.av_xcvr_pipe_native_hip.inst_av_xcvr_native.inst_av_pma.genblk1.av_rx_pma.rx_pmas[0].rx_pma.rx_cdr.cyclonev_channel_pll_encrypted_inst.<protected>.<protected>.LABEL_ME3.inst_cdr_clk90_pcie_11.no_need_to_gen
+# Info: reference_clock_frequency = 100 MHz
+# Info: output_clock_frequency = 4000.000000 MHz
+# Info: phase_shift = 62 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 125.000000
+# Info: output_clock_low_period = 125.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.refclk_to_250mhz.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.refclk_to_250mhz.no_need_to_gen
+# Info: reference_clock_frequency = 100.0 MHz
+# Info: output_clock_frequency = 250.0 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 2000.000000
+# Info: output_clock_low_period = 2000.000000
+# Info: =================================================
+# Info:           Generic PLL Summary
+# Info: =================================================
+# Time scale of (hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.pll_100mhz_to_500mhz.no_need_to_gen) is  1ps /  1ps
+# Info: hierarchical_name = hp_tb.hp_inst.pcie.pcie_avmm_inst.pcie_cv_hip_avmm_0.c5_hip_ast.altpcie_av_hip_ast_hwtcl.altpcie_av_hip_128bit_atom.pll_100mhz_to_500mhz.no_need_to_gen
+# Info: reference_clock_frequency = 100.0 MHz
+# Info: output_clock_frequency = 500.0 MHz
+# Info: phase_shift = 0 ps
+# Info: duty_cycle = 50
+# Info: sim_additional_refclk_cycles_to_lock = 0
+# Info: output_clock_high_period = 1000.000000
+# Info: output_clock_low_period = 1000.000000
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0ll
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0li
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0iO
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0il
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0OO
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0Ol
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0Oi
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0lO
+# Note : CMU PLL is reset
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl0i0ii
+#  Note : Stratix II PLL is enabled
+# Time: 0  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl00O0i.stratixii_pll.pll1
+#  Note : Stratix II PLL locked to incoming clock
+# Time: 25000  Instance: hp_tb.bfm_rp_inst.altpcie_tbed_sv_hwtcl_inst.g_bfm_top_rp.altpcietb_bfm_top_rp.g_bfm.genblk1.rp.rp.nl00O0i.stratixii_pll.pll1
+# INFO:             464 ns Completed initial configuration of Root Port.                                                       
+# INFO:            2585 ns  EP LTSSM State: DETECT.ACTIVE                                                                      
+# INFO:            2621 ns  RP LTSSM State: DETECT.ACTIVE                                                                      
+# INFO:            2625 ns  EP LTSSM State: POLLING.ACTIVE                                                                     
+# INFO:            5869 ns  RP LTSSM State: POLLING.ACTIVE                                                                     
+# INFO:            7997 ns  RP LTSSM State: POLLING.CONFIG                                                                     
+# INFO:            8329 ns  EP LTSSM State: POLLING.CONFIG                                                                     
+# INFO:            9417 ns  EP LTSSM State: CONFIG.LINKWIDTH.START                                                             
+# INFO:            9597 ns  RP LTSSM State: CONFIG.LINKWIDTH.START                                                             
+# INFO:           10185 ns  EP LTSSM State: CONFIG.LINKWIDTH.ACCEPT                                                            
+# INFO:           10685 ns  RP LTSSM State: CONFIG.LINKWIDTH.ACCEPT                                                            
+# INFO:           11021 ns  RP LTSSM State: CONFIG.LANENUM.WAIT                                                                
+# INFO:           11657 ns  EP LTSSM State: CONFIG.LANENUM.WAIT                                                                
+# INFO:           11913 ns  EP LTSSM State: CONFIG.LANENUM.ACCEPT                                                              
+# INFO:           11981 ns  RP LTSSM State: CONFIG.LANENUM.ACCEPT                                                              
+# INFO:           12301 ns  RP LTSSM State: CONFIG.COMPLETE                                                                    
+# INFO:           12697 ns  EP LTSSM State: CONFIG.COMPLETE                                                                    
+# INFO:           13785 ns  EP LTSSM State: CONFIG.IDLE                                                                        
+# INFO:           13965 ns  RP LTSSM State: CONFIG.IDLE                                                                        
+# INFO:           14045 ns  RP LTSSM State: L0                                                                                 
+# INFO:           14297 ns  EP LTSSM State: L0                                                                                 
+# INFO:           17304 ns                                                                                                     
+# INFO:           17304 ns Configuring Bus 001, Device 001, Function 00                                                        
+# INFO:           17304 ns   EP Read Only Configuration Registers:                                                             
+# INFO:           17304 ns                 Vendor ID: 1172                                                                     
+# INFO:           17304 ns                 Device ID: E001                                                                     
+# INFO:           17304 ns               Revision ID: 01                                                                       
+# INFO:           17304 ns                Class Code: FF0000                                                                   
+# INFO:           17304 ns       Subsystem Vendor ID: 0000                                                                     
+# INFO:           17304 ns              Subsystem ID: 0000                                                                     
+# INFO:           17304 ns             Interrupt Pin: INTA# used                                                               
+# INFO:           17304 ns                                                                                                     
+# INFO:           18744 ns   PCI MSI Capability Register:                                                                      
+# INFO:           18744 ns    64-Bit Address Capable: Supported                                                                
+# INFO:           18744 ns        Messages Requested:  4                                                                       
+# INFO:           18744 ns                                                                                                     
+# INFO:           25864 ns   EP PCI Express Link Status Register (1011):                                                       
+# INFO:           25864 ns     Negotiated Link Width: x1                                                                       
+# INFO:           25864 ns         Slot Clock Config: System Reference Clock Used                                              
+# INFO:           27429 ns  RP LTSSM State: RECOVERY.RCVRLOCK                                                                  
+# INFO:           28161 ns  EP LTSSM State: RECOVERY.RCVRLOCK                                                                  
+# INFO:           28817 ns  EP LTSSM State: RECOVERY.RCVRCFG                                                                   
+# INFO:           29621 ns  RP LTSSM State: RECOVERY.RCVRCFG                                                                   
+# INFO:           31749 ns  RP LTSSM State: RECOVERY.SPEED                                                                     
+# INFO:           32033 ns  EP LTSSM State: RECOVERY.SPEED                                                                     
+# INFO:           32907 ns  RP LTSSM State: RECOVERY.RCVRLOCK                                                                  
+# INFO:           32921 ns  EP LTSSM State: RECOVERY.RCVRLOCK                                                                  
+# INFO:           33299 ns  RP LTSSM State: RECOVERY.RCVRCFG                                                                   
+# INFO:           33375 ns  EP LTSSM State: RECOVERY.RCVRCFG                                                                   
+# INFO:           34035 ns  RP LTSSM State: RECOVERY.IDLE                                                                      
+# INFO:           34049 ns  EP LTSSM State: RECOVERY.IDLE                                                                      
+# INFO:           34147 ns  RP LTSSM State: L0                                                                                 
+# INFO:           34225 ns  EP LTSSM State: L0                                                                                 
+# INFO:           34896 ns        Current Link Speed: 5.0GT/s                                                                  
+# INFO:           34896 ns                                                                                                     
+# INFO:           35688 ns   EP PCI Express Link Control Register (0040):                                                      
+# INFO:           35688 ns       Common Clock Config: System Reference Clock Used                                              
+# INFO:           35688 ns                                                                                                     
+# INFO:           36664 ns                                                                                                     
+# INFO:           36664 ns   EP PCI Express Capabilities Register (0002):                                                      
+# INFO:           36664 ns        Capability Version: 2                                                                        
+# INFO:           36664 ns                 Port Type: Native Endpoint                                                          
+# INFO:           36664 ns                                                                                                     
+# INFO:           36664 ns   EP PCI Express Device Capabilities Register (00008000):                                           
+# INFO:           36664 ns     Max Payload Supported: 128 Bytes                                                                
+# INFO:           36664 ns              Extended Tag: Not Supported                                                            
+# INFO:           36664 ns    Acceptable L0s Latency: Less Than 64 ns                                                          
+# INFO:           36664 ns    Acceptable L1  Latency: Less Than 1 us                                                           
+# INFO:           36664 ns          Attention Button: Not Present                                                              
+# INFO:           36664 ns       Attention Indicator: Not Present                                                              
+# INFO:           36664 ns           Power Indicator: Not Present                                                              
+# INFO:           36664 ns                                                                                                     
+# INFO:           36664 ns   EP PCI Express Link Capabilities Register (01406412):                                             
+# INFO:           36664 ns        Maximum Link Width: x1                                                                       
+# INFO:           36664 ns      Supported Link Speed: 5.0GT/s or 2.5GT/s                                                       
+# INFO:           36664 ns                 L0s Entry: Supported                                                                
+# INFO:           36664 ns                 L1  Entry: Not Supported                                                            
+# INFO:           36664 ns          L0s Exit Latency: 2 us to 4 us                                                             
+# INFO:           36664 ns          L1  Exit Latency: Less Than 1 us                                                           
+# INFO:           36664 ns               Port Number: 01                                                                       
+# INFO:           36664 ns   Surprise Dwn Err Report: Not Supported                                                            
+# INFO:           36664 ns    DLL Link Active Report: Not Supported                                                            
+# INFO:           36664 ns                                                                                                     
+# INFO:           36664 ns   EP PCI Express Device Capabilities 2 Register (0000001F):                                         
+# INFO:           36664 ns   Completion Timeout Rnge: ABCD (50us to 64s)                                                       
+# INFO:           37448 ns                                                                                                     
+# INFO:           37448 ns   EP PCI Express Device Control Register (0010):                                                    
+# INFO:           37448 ns   Error Reporting Enables: 0                                                                        
+# INFO:           37448 ns          Relaxed Ordering: Enabled                                                                  
+# INFO:           37448 ns               Max Payload: 128 Bytes                                                                
+# INFO:           37448 ns              Extended Tag: Disabled                                                                 
+# INFO:           37448 ns          Max Read Request: 128 Bytes                                                                
+# INFO:           37448 ns                                                                                                     
+# INFO:           37448 ns   EP PCI Express Device Status Register (0000):                                                     
+# INFO:           37448 ns                                                                                                     
+# INFO:           38192 ns   EP PCI Express Virtual Channel Capability:                                                        
+# INFO:           38192 ns          Virtual Channel: 1                                                                         
+# INFO:           38192 ns          Low Priority VC: 0                                                                         
+# INFO:           38192 ns                                                                                                     
+# INFO:           41208 ns                                                                                                     
+# INFO:           41208 ns BAR Address Assignments:                                                                            
+# INFO:           41208 ns BAR    Size       Assigned Address  Type                                                            
+# INFO:           41208 ns ---    ----       ----------------                                                                  
+# INFO:           41208 ns BAR0    64 KBytes          00200000 Non-Prefetchable                                                
+# INFO:           41208 ns BAR1   128 KBytes          00220000 Non-Prefetchable                                                
+# INFO:           41208 ns BAR2     1 MBytes          00300000 Non-Prefetchable                                                
+# INFO:           41208 ns BAR3   Disabled                                                                                     
+# INFO:           41208 ns BAR4   Disabled                                                                                     
+# INFO:           41208 ns BAR5   Disabled                                                                                     
+# INFO:           41208 ns ExpROM Disabled                                                                                     
+# INFO:           42328 ns                                                                                                     
+# INFO:           42328 ns Completed configuration of Endpoint BARs.                                                           
+# WRITE START
+#         512 bytes,           0 Kb,           0 Mb
+# WRITED
+# VERIFICATION START
+#         512 bytes,           0 Kb,           0 Mb
+# VERIFIED
+# ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(131)
+#    Time: 163088010 ps  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
+# Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 131
+# End time: 18:09:06 on Mar 15,2023, Elapsed time: 0:01:09
+# Errors: 0, Warnings: 34
