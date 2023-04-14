@@ -1,0 +1,92 @@
+module iv_loader
+#(   
+    parameter  BAR2_AW         = 16,
+    parameter  BAR2_DW         = 64,
+    parameter  BAR2_MAX_BURST  = 1,
+    parameter  PAGE_COUNT      = 4,
+	parameter  PAGE_SIZE       = 64,
+    parameter  F_CLK           = 10000000, // 10 Mhz
+    
+    parameter PCW		 = $clog2(PAGE_COUNT),
+    parameter MEM_AW     = $clog2(PAGE_COUNT*PAGE_SIZE*BAR2_DW/8)
+)
+(
+    input  logic                 clock,
+    input  logic                 reset,
+    
+    output logic                 n_config,
+    input  logic                 n_status,
+    input  logic                 conf_done,
+    output logic                 dclk,
+    output logic                 data,
+    output logic [3:0]           msel,
+    
+    input  logic                 start,
+    output logic                 error,
+    output logic                 ready,
+    
+    input  logic [MEM_AW-1:0]    start_addr,
+    avmm_if.master               bar2_i,
+    output  logic [PCW-1:0]      page_number
+);    
+    logic [BAR2_DW-1:0] word;
+    logic               word_valid;
+    logic               word_writed;
+    
+    
+    memory_reader
+    #(
+        .AW(BAR2_AW),
+        .DW(BAR2_DW),
+        .MAX_BURST(BAR2_MAX_BURST),
+        .PAGE_COUNT(PAGE_COUNT),
+        .PAGE_SIZE(PAGE_SIZE)
+    )
+    reader
+    (
+        clock,
+        reset,
+        
+        start_addr,
+        page_number,
+        bar2_i,
+        
+        start,
+       
+        word,
+        word_valid,
+        word_writed
+    );
+    
+    
+    loader
+    #(
+        .DW(BAR2_DW),
+        .F_CLK(F_CLK) // 10 Mhz
+    )
+    loader
+    (
+        n_config,
+        n_status,
+        conf_done,
+        dclk,
+        data,
+        msel,
+        
+        word,
+        word_valid,
+        word_writed,
+        
+        start,
+        error,
+        ready,
+        
+        clock,
+        reset
+    );
+
+endmodule : iv_loader
+
+
+
+

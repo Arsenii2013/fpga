@@ -1,0 +1,119 @@
+module load_controller
+#(
+	parameter  AW         = 16,
+	parameter  DW         = 64,
+	parameter  MAX_BURST  = 1,
+    parameter  PAGE_COUNT = 4,
+	parameter  PAGE_SIZE  = 64,
+    
+    parameter  MEM_AW     = $clog2(PAGE_COUNT*PAGE_SIZE)
+ )
+(
+	input logic clock,
+	input logic reset,
+	avmm_if.slave bus,
+	
+    
+    output logic [MEM_AW-1:0]   start_addr,
+    
+    output logic  start,
+    input  logic  error,
+    input  logic  ready
+);	
+	localparam BCW 			= $clog2(MAX_BURST);
+	localparam UNUSED_BITS  = $clog2(DW/8);
+	
+    typedef logic [AW - 1:0] addr_t;
+	typedef enum addr_t {
+		 SR     		= addr_t'(8'h00),
+		 CR     		= addr_t'(8'h04),
+		 CR_S   		= addr_t'(8'h08),
+		 CR_C   		= addr_t'(8'h0C),
+		 START_ADDR     = addr_t'(8'h10)
+	} regs_t;
+
+	enum {IDLE, READ, WRITE} state, next_state;
+		
+	logic [AW - UNUSED_BITS - 1:0]	reg_addr = '0;
+	
+    logic [BCW-1:0] 				cnt 	 = '0;
+	logic [BCW-1:0] 				bus_cnt  = '0;
+	
+	logic [DW-1:0]					cr       = '0;
+	logic [DW-1:0] 					sr 		 = '0;
+	
+	assign bus.waitrequest   = (state == IDLE);
+	assign bus.readdatavalid = (state == READ);
+	
+    assign start = cr[0];
+    assign sr[0] = cr[0];
+    assign sr[1] = ready;
+    assign sr[2] = error;
+    
+	always_comb begin
+		case(reg_addr) 
+		SR:         bus.readdata = sr;
+		CR:         bus.readdata = cr;
+		START_ADDR: bus.readdata = start_addr;
+		default:    bus.readdata = 'hDEAD;
+		endcase
+	end
+	
+	always_ff @(posedge clock, posedge reset) begin
+		if(reset) begin
+            state  	   <= IDLE;
+			cnt 	   <= '0;
+			bus_cnt    <= '0;
+			reg_addr   <= '0;
+            cr         <= '0;
+            //sr         <= '0;
+            start_addr <= '0;
+		end else begin
+			state    <= next_state;
+            
+            if(error || ready)
+                cr[0] <= 0;
+		
+			case(state) 
+			IDLE: 
+				if(bus.read || bus.write) begin
+					cnt 		<= '0;
+					bus_cnt 	<= bus.burstcount;
+					reg_addr    <= bus.address;
+				end
+			READ: begin
+				cnt 	    <= cnt+1;
+				reg_addr    <= reg_addr+DW/8;
+			end
+			WRITE: 
+				if(bus.write) begin
+					case(reg_addr) 
+						CR:       	cr          <= bus.writedata;
+						CR_S:       cr          <= cr | bus.writedata;
+						CR_C:       cr          <= cr & bus.writedata;
+						START_ADDR: start_addr  <= bus.writedata;
+						default: ;
+					endcase
+					cnt 		<= cnt+1;
+					reg_addr    <= reg_addr+DW/8;
+				end
+			endcase
+		end
+	end
+	
+	always_comb begin
+		case(state) 
+		IDLE: begin
+			if(bus.write || bus.read)
+				next_state = (bus.write) ? WRITE : READ;
+			else 
+				next_state = IDLE;
+		end
+		READ:
+			next_state = (cnt == bus_cnt - 1) ? IDLE : READ;
+		WRITE:
+			next_state = (cnt == bus_cnt - 1) ? IDLE : WRITE;
+		endcase
+	end
+	
+endmodule

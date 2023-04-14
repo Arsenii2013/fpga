@@ -26,6 +26,17 @@ logic             rx;
 logic             tx;
 pipe_if           pipe();
 
+
+wire              n_config;
+logic             n_status;
+logic             conf_done;
+
+wire              dclk;
+wire              data;
+logic             data_e;
+logic  [7:0]      data_exp;
+wire  [3:0]       msel;
+
 //------------------------------------------------
 //
 //		Logic
@@ -71,7 +82,13 @@ hp hp_inst
     .pci_rx           ( rx               ),
     .pci_tx           ( tx               ),
     
-    .pipe             ( pipe             )
+    .pipe             ( pipe             ),
+    .n_config         ( n_config         ),
+    .n_status         ( n_status         ),
+    .conf_done        ( conf_done        ),
+    .dclk             ( dclk             ),
+    .data             ( data             ),
+    .msel             ( msel             )
 );
 //------------------------------------------------
 endmodule : hp_tb

@@ -1,0 +1,111 @@
+module loader
+#(
+    parameter DW    = 64,
+    parameter F_CLK = 10000000 // 10 Mhz
+)
+(
+    output logic          n_config,
+    input  logic          n_status,
+    input  logic          conf_done,
+    output logic          dclk,
+    output logic          data,
+    output logic [3:0]    msel,
+    
+    input  logic [DW-1:0] word,
+    input  logic          word_valid,
+    output logic          word_writed,
+    
+    input  logic          start,
+    output logic          error,
+    output logic          finish,
+    
+    input  logic          clock,
+    input  logic          reset
+);
+    localparam BITDW  = $clog2(DW);
+    
+    enum {IDLE, STARTING, WRITING, WORD_WRITED, ERROR} state = IDLE, next_state = IDLE;
+    
+    logic [BITDW-1:0]  bit_number  = 0;
+    logic starter_enable;
+    logic starter_finished;
+    logic starter_error;
+    
+    starter #(.F_CLK(F_CLK)) starter_i
+    (
+        n_config,
+        n_status,
+        conf_done,
+        msel,
+    
+        starter_enable,
+        starter_error,
+        starter_finished,
+    
+        clock,
+        reset
+    );
+    
+    assign starter_enable = start && (state == IDLE);
+    assign data           = word[bit_number];
+    assign finish         = (state == IDLE);
+    assign error          = (state == ERROR);
+    assign word_writed    = (state == WORD_WRITED);
+    
+    always_ff @(posedge clock, posedge reset) begin
+		if(reset) begin
+			state      <= IDLE;
+            dclk       <= 0;
+            bit_number <= 0;
+		end else begin
+            state      <= next_state;
+            case(state) 
+            IDLE: begin 
+            end
+            STARTING: begin 
+            end
+            WRITING: begin
+                if(word_valid) begin
+                    dclk <= !dclk; 
+                    if(dclk)
+                        bit_number <= bit_number + 1;
+                end
+            end
+            WORD_WRITED: begin
+                dclk        <= 0;
+                bit_number  <= 0;
+            end
+            endcase
+        end
+    end
+
+    always_comb begin
+		case(state) 
+		IDLE: begin
+            next_state = (start) ? STARTING : IDLE;
+		end
+        STARTING: begin
+            if(starter_error)
+                next_state = ERROR;
+            else
+                next_state = (starter_finished) ? WORD_WRITED : STARTING;
+		end
+		WRITING:
+            if(conf_done)
+                next_state = IDLE;
+            else if(!n_status)
+                next_state = ERROR;
+            else
+                next_state = (bit_number == DW-1) ? WORD_WRITED : WRITING;
+		WORD_WRITED:
+            if(conf_done)
+                next_state = IDLE;
+            else if(!n_status)
+                next_state = ERROR;
+            else
+                next_state = (word_valid) ? WRITING : WORD_WRITED;
+        ERROR:
+            next_state = (start) ? STARTING : ERROR;
+		endcase
+    end
+endmodule : loader

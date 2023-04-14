@@ -1,0 +1,70 @@
+module starter
+#(
+    parameter F_CLK = 10000000 // 10 Mhz
+)
+(
+    output logic          n_config,
+    input  logic          n_status,
+    input  logic          conf_done,
+    
+    output logic [3:0]    msel,
+    
+    input  logic          start,
+    output logic          error,
+    output logic          ready,
+    
+    input  logic          clock,
+    input  logic          reset
+);
+    localparam PERIOD       = (10 ** 9)/F_CLK; // in ns
+    localparam tCFG         = 500; // 500 ns
+    localparam tCFG_cycle   = tCFG/PERIOD;
+    localparam tCF2CK       = 230; // 230 ns
+    localparam tCF2CK_cycle = tCF2CK/PERIOD;
+    localparam EDW          = $clog2((tCFG_cycle > tCF2CK_cycle) ? tCFG_cycle : tCF2CK_cycle);
+    
+    enum {IDLE, WAIT_tCFG, WAIT_tCF2CK, FINISH, ERROR} state = IDLE, next_state = IDLE;
+    
+    logic [EDW:0] elapsed = 0;
+    
+    assign ready        = (state == IDLE);
+    assign error        = (state == ERROR);
+    assign n_config     = (state != WAIT_tCFG);
+    assign msel         = '0; // Cyclone IV E, 0000 - standard PS
+    
+    always_ff @(posedge clock, posedge reset) begin
+		if(reset) begin
+			state  	     <= IDLE;
+            elapsed      <= 0;
+		end else begin
+            state        <= next_state;
+            case(state) 
+            WAIT_tCFG:
+                elapsed  <= (next_state == WAIT_tCFG) ? elapsed + 1 : 0;
+            WAIT_tCF2CK:
+                elapsed  <= (next_state == WAIT_tCF2CK) ? elapsed + 1 : 0;
+            endcase
+        end
+    end
+    
+    always_comb begin
+		case(state) 
+		IDLE: begin
+			next_state = (start) ? WAIT_tCFG : IDLE;
+		end
+		WAIT_tCFG:
+			if(elapsed == tCFG_cycle)
+                next_state = (!conf_done && !n_status) ? WAIT_tCF2CK : ERROR;
+            else
+                next_state = WAIT_tCFG;
+        WAIT_tCF2CK:
+            if(elapsed == tCF2CK_cycle)
+                next_state = (!conf_done && n_status) ? IDLE : ERROR;
+            else
+                next_state = WAIT_tCF2CK;
+        ERROR:
+            next_state = (start) ? WAIT_tCFG : IDLE;
+		endcase
+	end
+
+endmodule : starter

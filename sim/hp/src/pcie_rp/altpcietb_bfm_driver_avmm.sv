@@ -28,6 +28,9 @@ module altpcietb_bfm_driver_avmm #(
 localparam RD_BUF_ADDR = 1 * (2 ** 16);
 localparam WR_BUF_ADDR = 2 * (2 ** 16);
 
+
+localparam PAGE_SELECTOR_OFFS   = 'h3800;
+localparam LOAD_CONTROLLER_OFFS = 'h3C00;
 //------------------------------------------------
 //
 //		Function & Tasks
@@ -69,7 +72,7 @@ task automatic file_to_mem(input string f_name);
 			status = $fread(to_write[j*8+:8], fd); 
 		end
         
-		pci_write(0, 8'h10, i / PAGE_SIZE);
+		pci_write(0, PAGE_SELECTOR_OFFS + 64'h10, i / PAGE_SIZE);
 		pci_write_long(2, (i % PAGE_SIZE) * DW/8, to_write);
 	end
 	
@@ -92,10 +95,11 @@ task automatic verify_mem_to_file(input string f_name);
         
 		for (int j=0; j <  DW/8; j++) begin 
 			status = $fread(from_file[j*8+:8], fd); 
+            //status = $fseek(fd, 0, 0);
 		end
         
-		pci_write(0, 8'h10, (i) / PAGE_SIZE);
-		pci_read_long(2, ((i) % PAGE_SIZE) * DW/8, from_mem);
+		pci_write(0, PAGE_SELECTOR_OFFS + 64'h10, i / PAGE_SIZE);
+		pci_read_long(2, (i % PAGE_SIZE) * DW/8, from_mem);
         
 		if(from_file != from_mem) begin
 			$display("ERROR: read %d page %d word expected:%h actual:%h", i / PAGE_SIZE, i % PAGE_SIZE, from_file, from_mem);
@@ -106,14 +110,88 @@ task automatic verify_mem_to_file(input string f_name);
 	$fclose(fd);
 endtask
 
+function copy_mem();     
+    hp_tb.hp_inst.hps_wrapper.loader_mem.pages <= hp_tb.hp_inst.hps_wrapper.bar_mem.pages; 
+endfunction
+
+task automatic iv_start_cfg(); 
+    localparam tCF2CD  = 300; // 300 ns to conf_done low
+    localparam tCF2ST0 = tCF2CD; // 300 ns to n_status low
+    localparam tSTATUS = 100000; // 100 mks n_status low width
+    localparam tCF2ST1 = 100000; // 100 mks to to n_status high
+    localparam tCF2CK  = 230000; // 100 mks to to n_status high
+    
+    @(negedge hp_tb.n_config)
+    #tCF2CD;
+    hp_tb.n_status  <= 0;
+    hp_tb.conf_done <= 0;
+    @(posedge hp_tb.n_config)
+    #tCF2ST1;
+    hp_tb.n_status  <= 1;
+    #(tCF2CK - tCF2ST1);
+endtask
+
+task automatic iv_end_cfg(); 
+    hp_tb.conf_done <= 1;
+endtask
+
+task automatic iv_error_cfg(); 
+    hp_tb.conf_done <= 0;
+    
+    hp_tb.n_status <= 0;
+    @(negedge hp_tb.sysclk)
+    @(negedge hp_tb.sysclk)
+    @(negedge hp_tb.sysclk)
+    hp_tb.n_status <= 1;
+endtask
+
+task automatic iv_recieve_bytes(input int cnt, input logic [7:0] data_expected [512], output int error); 
+    error = 0;
+    for (int i=0; i < cnt && !error; i++) begin 
+        hp_tb.data_e <= data_expected[i][0];
+        for (int j=0; j < 8 && !error; j++) begin 
+            @(posedge hp_tb.dclk)
+            if(hp_tb.data != data_expected[i][j]) begin
+                $display("ERROR read byte %d(%x) bit %d: actual %h expected %h", i, data_expected[i], j, hp_tb.data, data_expected[i][j]);
+                error = 1;
+            end
+            @(negedge hp_tb.dclk)    
+            hp_tb.data_e <= data_expected[i][j+1];
+        end
+    end
+endtask
+
+task automatic verify_load(input string f_name); 	
+	localparam DW 		  = 64;
+    logic [7:0] data_expected [512];
+	int fd, status;
+	int i=0;
+    int error;
+	fd = $fopen(f_name, "rb");
+	
+	for (; (i < 512) && !$feof(fd); i++) begin
+        status = $fread(data_expected[i], fd); 
+        status = $fseek(fd, 0, 0);
+    end
+    
+    @(posedge hp_tb.sysclk)
+    iv_start_cfg(); 
+    iv_recieve_bytes(i, data_expected, error);
+    if(error)
+        iv_error_cfg(); 
+    else
+        iv_end_cfg(); 
+	$fclose(fd);
+	$display("%d bytes, %d Kb, %d Mb", i*DW/8, i*DW/8/1024, i*DW/8/1024/1024);
+endtask
+
 //------------------------------------------------
 //
 //  Logic
 //
 always begin : main
     
-    automatic int res = 0;
-	 automatic int data = 'h00000000;
+    automatic int sr = 0;
 
     ebfm_cfg_rp_ep(
         BAR_TABLE_POINTER, // BAR Size/Address info for Endpoint
@@ -125,13 +203,53 @@ always begin : main
     );
 
 	$display("WRITE START");
-	file_to_mem("/home/sescer/quartus_projects/big_avalon_slave/test.b");
+	file_to_mem("/home/sescer/quartus_projects/fpga/sim/hp/test.b");
 	$display("WRITED");
 	
 	$display("VERIFICATION START");
-	verify_mem_to_file("/home/sescer/quartus_projects/big_avalon_slave/test.b");
+	verify_mem_to_file("/home/sescer/quartus_projects/fpga/sim/hp/test.b");
 	$display("VERIFIED");
 	 
+    $display("COPY START");
+	copy_mem(); 
+	$display("COPYED");
+    
+    hp_tb.n_status     <= 1;
+    hp_tb.conf_done    <= 1;
+    
+    pci_read(0, LOAD_CONTROLLER_OFFS + 64'h00, sr);
+    $display("loader sr: ready(%d), error(%d), start(%d)", (sr>>1) & 'h1, (sr>>2) & 'h1, sr & 'h1);
+    pci_write(0, LOAD_CONTROLLER_OFFS + 64'h04, 'h01);
+    
+    $display("LOAD START");
+	verify_load("/home/sescer/quartus_projects/fpga/sim/hp/test.b");
+	$display("LOADED");
+    
+    @(negedge hp_tb.sysclk)
+    @(negedge hp_tb.sysclk)
+    pci_read(0, LOAD_CONTROLLER_OFFS + 64'h00, sr);
+    $display("loader sr: ready(%d), error(%d), start(%d)", (sr>>1) & 'h1, (sr>>2) & 'h1, sr & 'h1);
+    pci_write(0, LOAD_CONTROLLER_OFFS + 64'h04, 'h01);
+    
+    $display("ERROR TEST START");
+	verify_load("/home/sescer/quartus_projects/fpga/sim/hp/zero.b");
+	$display("ERROR TESTED");
+    
+    @(negedge hp_tb.sysclk)
+    @(negedge hp_tb.sysclk)
+    pci_read(0, LOAD_CONTROLLER_OFFS + 64'h00, sr);
+    $display("loader sr: ready(%d), error(%d), start(%d)", (sr>>1) & 'h1, (sr>>2) & 'h1, sr & 'h1);
+    pci_write(0, LOAD_CONTROLLER_OFFS + 64'h04, 'h01);
+    
+    $display("LOAD START");
+	verify_load("/home/sescer/quartus_projects/fpga/sim/hp/test.b");
+	$display("LOADED");
+    
+    @(negedge hp_tb.sysclk)
+    @(negedge hp_tb.sysclk)
+    pci_read(0, LOAD_CONTROLLER_OFFS + 64'h00, sr);
+    $display("loader sr: ready(%d), error(%d), start(%d)", (sr>>1) & 'h1, (sr>>2) & 'h1, sr & 'h1);
+    
     #30us;
 
     $stop();

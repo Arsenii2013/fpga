@@ -49,7 +49,7 @@ proc sim { } {
     radix -hex
     log -r *
     run 10 ns
-    #do mem_init.do
+    do wave.tcl
     set t1 [clock seconds]
     run -all
     set t2 [clock seconds]

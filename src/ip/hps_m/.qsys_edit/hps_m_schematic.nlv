@@ -1,0 +1,62 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst hps_m.hps.gmac0 -pg 1
+preplace inst hps_m.hps.bridges -pg 1
+preplace inst hps_m.hps.hps_io.border -pg 1
+preplace inst hps_m.hps.axi_sdram -pg 1
+preplace inst hps_m.hps.dcan0 -pg 1
+preplace inst hps_m.hps.gmac1 -pg 1
+preplace inst hps_m.hps.spim0 -pg 1
+preplace inst hps_m.hps.rstmgr -pg 1
+preplace inst hps_m -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst hps_m.hps.timer -pg 1
+preplace inst hps_m.hps.dcan1 -pg 1
+preplace inst hps_m.hps.spim1 -pg 1
+preplace inst hps_m.hps.gpio0 -pg 1
+preplace inst hps_m.hps.clkmgr -pg 1
+preplace inst hps_m.hps -pg 1 -lvl 1 -y 50
+preplace inst hps_m.hps.gpio1 -pg 1
+preplace inst hps_m.hps.dma -pg 1
+preplace inst hps_m.hps.scu -pg 1
+preplace inst hps_m.hps.l3regs -pg 1
+preplace inst hps_m.hps.qspi -pg 1
+preplace inst hps_m.hps.nand0 -pg 1
+preplace inst hps_m.hps.gpio2 -pg 1
+preplace inst hps_m.hps.wd_timer0 -pg 1
+preplace inst hps_m.hps.timer0 -pg 1
+preplace inst hps_m.hps.fpga_interfaces -pg 1
+preplace inst hps_m.hps.usb0 -pg 1
+preplace inst hps_m.hps.wd_timer1 -pg 1
+preplace inst hps_m.hps.timer1 -pg 1
+preplace inst hps_m.hps.usb1 -pg 1
+preplace inst hps_m.hps.timer2 -pg 1
+preplace inst hps_m.hps.timer3 -pg 1
+preplace inst hps_m.hps.uart0 -pg 1
+preplace inst hps_m.hps.sysmgr -pg 1
+preplace inst hps_m.hps.hps_io -pg 1
+preplace inst hps_m.hps.sdrctl -pg 1
+preplace inst hps_m.hps.i2c0 -pg 1
+preplace inst hps_m.hps.uart1 -pg 1
+preplace inst hps_m.hps.clk_0 -pg 1
+preplace inst hps_m.hps.i2c1 -pg 1
+preplace inst hps_m.hps.sdmmc -pg 1
+preplace inst hps_m.hps.i2c2 -pg 1
+preplace inst hps_m.hps.fpgamgr -pg 1
+preplace inst hps_m.hps.arm_gic_0 -pg 1
+preplace inst hps_m.hps.f2s_periph_ref_clk -pg 1
+preplace inst hps_m.hps.eosc1 -pg 1
+preplace inst hps_m.hps.i2c3 -pg 1
+preplace inst hps_m.hps.L2 -pg 1
+preplace inst hps_m.hps.arm_a9_0 -pg 1
+preplace inst hps_m.hps.eosc2 -pg 1
+preplace inst hps_m.hps.axi_ocram -pg 1
+preplace inst hps_m.hps.arm_a9_1 -pg 1
+preplace inst hps_m.hps.f2s_sdram_ref_clk -pg 1
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps_m.hps_io,(SLAVE)hps.hps_io) 1 0 1 NJ
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps.f2h_sdram1_clock,(SLAVE)hps_m.sdram1_clk) 1 0 1 NJ
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps_m.sdram0,(SLAVE)hps.f2h_sdram0_data) 1 0 1 NJ
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps.f2h_sdram1_data,(SLAVE)hps_m.sdram1) 1 0 1 NJ
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps.memory,(SLAVE)hps_m.memory) 1 0 1 NJ
+preplace netloc EXPORT<net_container>hps_m</net_container>(SLAVE)hps_m.sdram0_clk,(SLAVE)hps.f2h_sdram0_clock) 1 0 1 NJ
+levelinfo -pg 1 0 80 360
+levelinfo -hier hps_m 90 210 350

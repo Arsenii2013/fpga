@@ -1,0 +1,205 @@
+`ifndef __HPS_WRAPPER_SV__
+`define __HPS_WRAPPER_SV__
+
+// synopsys translate off
+`define SIMULATOR
+// synopsys translate on
+
+`include "hp.svh"
+
+module hps_wrapper_m import hp_pkg::*;
+#(
+    parameter LOG_AW = 32,
+    parameter BAR_AW = 32
+)
+(  
+    `ifndef SIMULATOR
+    output logic [        15:0] memory_mem_a,
+    output logic [         2:0] memory_mem_ba,
+    output logic                memory_mem_ck,
+    output logic                memory_mem_ck_n,
+    output logic                memory_mem_cke,
+    output logic                memory_mem_cs_n,
+    output logic                memory_mem_ras_n,
+    output logic                memory_mem_cas_n,
+    output logic                memory_mem_we_n,
+    output logic                memory_mem_reset_n,
+    inout  wire  [        31:0] memory_mem_dq,
+    inout  wire  [         3:0] memory_mem_dqs,
+    inout  wire  [         3:0] memory_mem_dqs_n,
+    output logic                memory_mem_odt,
+    output logic [         3:0] memory_mem_dm,
+    input  wire                 memory_oct_rzqin,
+
+   	inout  wire                 hps_qspi_IO0,
+	inout  wire                 hps_qspi_IO1,
+	inout  wire                 hps_qspi_IO2,
+	inout  wire                 hps_qspi_IO3,
+	output logic                hps_qspi_SS0,
+	output logic                hps_qspi_CLK,
+
+    output logic                hps_emac1_TX_CLK,
+    output logic                hps_emac1_TXD0,
+    output logic                hps_emac1_TXD1,
+    output logic                hps_emac1_TXD2,
+    output logic                hps_emac1_TXD3,
+    input  logic                hps_emac1_RXD0,
+    inout  wire                 hps_emac1_MDIO,
+    output logic                hps_emac1_MDC,
+    input  logic                hps_emac1_RX_CTL,
+    output logic                hps_emac1_TX_CTL,
+    input  logic                hps_emac1_RX_CLK,
+    input  logic                hps_emac1_RXD1,
+    input  logic                hps_emac1_RXD2,
+    input  logic                hps_emac1_RXD3,
+
+    inout  wire                 hps_gpio_GPIO44,
+
+    input  logic                hps_uart0_RX,
+    output logic                hps_uart0_TX,
+    `endif // SIMULATOR
+
+    input  logic                clk,
+    avmm_if.slave               log_i,
+    avmm_if.slave               bar_i,
+
+    input  logic [SDRAM_AW-1:0] read_window_offs
+);
+
+//------------------------------------------------
+`timescale 1ns / 1ps
+
+//------------------------------------------------
+//
+//      Parameters
+//
+localparam FPGA_IF_OFFSET  = SDRAM_OFFSET / (SDRAM_DW/8);
+localparam FPGA_IF_ALIGN   = $clog2(SDRAM_DW/8);
+localparam FPGA_IF_AW      = SDRAM_AW - FPGA_IF_ALIGN;
+
+//------------------------------------------------
+//
+//      Types
+//
+typedef logic [FPGA_IF_AW-1:0] bridge_addr_t;
+
+//------------------------------------------------
+//
+//      Objects
+//
+bridge_addr_t sdram0_address;
+bridge_addr_t sdram1_address;
+
+//------------------------------------------------
+//
+//      Logic
+//
+assign sdram0_address = bridge_addr_t'(log_i.address[LOG_AW-1:FPGA_IF_ALIGN]) + 
+                        bridge_addr_t'(FPGA_IF_OFFSET);
+
+assign sdram1_address = bridge_addr_t'(bar_i.address[BAR_AW-1:FPGA_IF_ALIGN]) + 
+                        bridge_addr_t'(FPGA_IF_OFFSET) +
+                        bridge_addr_t'(read_window_offs[SDRAM_AW-1:FPGA_IF_ALIGN]);
+
+//------------------------------------------------
+`ifndef SIMULATOR
+    hps_m hps
+    (
+        .memory_mem_a                     ( memory_mem_a        ),
+        .memory_mem_ba                    ( memory_mem_ba       ),
+        .memory_mem_ck                    ( memory_mem_ck       ),
+        .memory_mem_ck_n                  ( memory_mem_ck_n     ),
+        .memory_mem_cke                   ( memory_mem_cke      ),
+        .memory_mem_cs_n                  ( memory_mem_cs_n     ),
+        .memory_mem_ras_n                 ( memory_mem_ras_n    ),
+        .memory_mem_cas_n                 ( memory_mem_cas_n    ),
+        .memory_mem_we_n                  ( memory_mem_we_n     ),
+        .memory_mem_reset_n               ( memory_mem_reset_n  ),
+        .memory_mem_dq                    ( memory_mem_dq       ),
+        .memory_mem_dqs                   ( memory_mem_dqs      ),
+        .memory_mem_dqs_n                 ( memory_mem_dqs_n    ),
+        .memory_mem_odt                   ( memory_mem_odt      ),
+        .memory_mem_dm                    ( memory_mem_dm       ),
+        .memory_oct_rzqin                 ( memory_oct_rzqin    ),
+
+        .hps_io_hps_io_uart0_inst_RX      ( hps_uart0_RX        ),
+        .hps_io_hps_io_uart0_inst_TX      ( hps_uart0_TX        ),
+
+        .hps_io_hps_io_qspi_inst_IO0      ( hps_qspi_IO0        ),
+        .hps_io_hps_io_qspi_inst_IO1      ( hps_qspi_IO1        ),
+        .hps_io_hps_io_qspi_inst_IO2      ( hps_qspi_IO2        ),
+        .hps_io_hps_io_qspi_inst_IO3      ( hps_qspi_IO3        ),
+        .hps_io_hps_io_qspi_inst_SS0      ( hps_qspi_SS0        ),
+        .hps_io_hps_io_qspi_inst_CLK      ( hps_qspi_CLK        ),
+
+        .hps_io_hps_io_emac1_inst_TX_CLK  ( hps_emac1_TX_CLK    ),
+        .hps_io_hps_io_emac1_inst_TXD0    ( hps_emac1_TXD0      ),
+        .hps_io_hps_io_emac1_inst_TXD1    ( hps_emac1_TXD1      ),
+        .hps_io_hps_io_emac1_inst_TXD2    ( hps_emac1_TXD2      ),
+        .hps_io_hps_io_emac1_inst_TXD3    ( hps_emac1_TXD3      ),
+        .hps_io_hps_io_emac1_inst_RXD0    ( hps_emac1_RXD0      ),
+        .hps_io_hps_io_emac1_inst_MDIO    ( hps_emac1_MDIO      ),
+        .hps_io_hps_io_emac1_inst_MDC     ( hps_emac1_MDC       ),
+        .hps_io_hps_io_emac1_inst_RX_CTL  ( hps_emac1_RX_CTL    ),
+        .hps_io_hps_io_emac1_inst_TX_CTL  ( hps_emac1_TX_CTL    ),
+        .hps_io_hps_io_emac1_inst_RX_CLK  ( hps_emac1_RX_CLK    ),
+        .hps_io_hps_io_emac1_inst_RXD1    ( hps_emac1_RXD1      ),
+        .hps_io_hps_io_emac1_inst_RXD2    ( hps_emac1_RXD2      ),
+        .hps_io_hps_io_emac1_inst_RXD3    ( hps_emac1_RXD3      ),
+
+        .hps_io_hps_io_gpio_inst_GPIO44   ( hps_gpio_GPIO44     ),
+
+        .sdram0_clk_clk                   ( clk                 ),
+        .sdram0_address                   ( sdram0_address      ),
+        .sdram0_burstcount                ( 1                   ),
+        .sdram0_waitrequest               ( log_i.waitrequest   ),
+        .sdram0_readdata                  ( log_i.readdata      ),
+        .sdram0_readdatavalid             ( log_i.readdatavalid ),
+        .sdram0_read                      ( log_i.read          ),
+        .sdram0_writedata                 ( log_i.writedata     ),
+        .sdram0_byteenable                ( '1                  ),
+        .sdram0_write                     ( log_i.write         ),
+
+        .sdram1_clk_clk                   ( clk                 ),
+        .sdram1_address                   ( sdram1_address      ),
+        .sdram1_burstcount                ( bar_i.burstcount    ),
+        .sdram1_waitrequest               ( bar_i.waitrequest   ),
+        .sdram1_readdata                  ( bar_i.readdata      ),
+        .sdram1_readdatavalid             ( bar_i.readdatavalid ),
+        .sdram1_read                      ( bar_i.read          ),
+        .sdram1_writedata                 ( bar_i.writedata     ),
+        .sdram1_byteenable                ( bar_i.byteenable    ),
+        .sdram1_write                     ( bar_i.write         )
+    );
+`else  // SIMULATOR
+    avmm_slave_stub
+    #(
+        .AW                               ( LOG_AW              ),
+        .DW                               ( LOG_DW              ),
+        .MAX_BURST                        ( 1                   )
+    )
+    log_mem
+    (
+        .clk                              ( clk                 ),
+        .rst                              ( 0                   ),
+        .bus                              ( log_i               )
+    );
+    //------------------------------------------------
+    avmm_slave_stub
+    #(
+        .AW                               ( BAR2_ADDR_W         ),
+        .DW                               ( BAR2_DATA_W         ),
+        .MAX_BURST                        ( BAR2_MAX_BURST      )
+    )
+    bar_mem
+    (
+        .clk                              ( clk                 ),
+        .rst                              ( 0                   ),
+        .bus                              ( bar_i               )
+    );
+    //------------------------------------------------
+`endif // SIMULATOR
+//------------------------------------------------
+endmodule : hps_wrapper_m
+
+`endif // __HPS_WRAPPER_SV__

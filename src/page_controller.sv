@@ -5,7 +5,7 @@ module page_controller
 	parameter  MAX_BURST  = 1,
 	parameter  PAGE_COUNT = 4,
 	parameter  PAGE_SIZE  = 64,
-	localparam PCW			 = $clog2(PAGE_COUNT)
+	parameter  PCW	      = $clog2(PAGE_COUNT)
 )
 (
 	input logic clock,
@@ -39,31 +39,31 @@ module page_controller
 	assign reg_addr_overflow = (reg_addr > PAGE_SIZE - 1);
 	always_ff @(posedge clock, posedge reset) begin
 		if(reset) begin
-			state  	<= IDLE;
+			state  	    <= IDLE;
 			cnt 	 	<= 'h0;
-			bus_cnt  <= 'h0;
-			reg_addr <= 'h0;
-			pages 	<= '{default:'{default:'h0}};
+			bus_cnt     <= 'h0;
+			reg_addr    <= 'h0;
+			pages 	    <= '{default:'{default:'h0}};
 		end else begin
-			state    <= next_state;
+			state       <= next_state;
 		
 			case(state) 
 			IDLE: 
 				if(bus.read || bus.write) begin
 					cnt 		<= 'h0;
 					bus_cnt 	<= bus.burstcount;
-					reg_addr <= bus.address[AW - 1:UNUSED_BITS];
+					reg_addr    <= bus.address[AW - 1:UNUSED_BITS];
 				end
 			READ: begin
-				cnt 		<= cnt+1;
-				reg_addr <= reg_addr+1;
+				cnt 		    <= cnt+1;
+				reg_addr        <= reg_addr+1;
 			end
 			WRITE: 
 				if(bus.write) begin // write may off
 					if(!reg_addr_overflow)
 						pages[page_number][reg_addr] <= (bus.writedata & mask) | (pages[page_number][reg_addr] & ~mask);
-					cnt 	   <= cnt+1;
-					reg_addr <= reg_addr+1;
+					cnt 	    <= cnt+1;
+					reg_addr    <= reg_addr+1;
 				end
 			endcase
 		end

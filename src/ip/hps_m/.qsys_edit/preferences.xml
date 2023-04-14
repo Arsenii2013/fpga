@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="47" />
+   <irq preferredWidth="34" />
+   <inputclock preferredWidth="208" />
+   <export preferredWidth="253" />
+   <description preferredWidth="367" />
+   <name preferredWidth="281" />
+  </columns>
+ </systemtable>
+ <library expandedCategories="Project,Library" />
+ <window width="962" height="1082" x="-2" y="0" />
+ <generation
+   block_symbol_file="0"
+   path="/home/sescer/quartus_projects/fpga/src/gen/_PROJECT_NAME_" />
+</preferences>

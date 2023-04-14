@@ -1,0 +1,25 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/sescer/quartus_projects/fpga/src/ip/hps_m/hps_m.qsys --synthesis=VERILOG --output-directory=/home/sescer/quartus_projects/fpga/src/gen/hps_m/synthesis --family="Cyclone V" --part=5CSTFD6D5F31I7
+Progress: Loading hps_m/hps_m.qsys
+Progress: Reading input file
+Progress: Adding hps [altera_hps 18.1]
+Progress: Parameterizing module hps
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: hps_m.hps: HPS Main PLL counter settings: n = 0  m = 31
+Info: hps_m.hps: HPS peripherial PLL counter settings: n = 0  m = 19
+Warning: hps_m.: You have exported the interface hps.f2h_sdram0_data but not its associated reset interface.  Export the driver(s) of hps.h2f_reset
+Warning: hps_m.: You have exported the interface hps.f2h_sdram1_data but not its associated reset interface.  Export the driver(s) of hps.h2f_reset
+Info: hps_m: Generating hps_m "hps_m" for QUARTUS_SYNTH
+Info: hps: "Running  for module: hps"
+Info: hps: HPS Main PLL counter settings: n = 0  m = 31
+Info: hps: HPS peripherial PLL counter settings: n = 0  m = 19
+Info: hps: "hps_m" instantiated altera_hps "hps"
+Info: fpga_interfaces: "hps" instantiated altera_interface_generator "fpga_interfaces"
+Info: hps_io: "hps" instantiated altera_hps_io "hps_io"
+Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: hps_m: Done "hps_m" with 5 modules, 49 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

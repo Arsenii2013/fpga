@@ -17,7 +17,9 @@
 # hexadecimal
 sim
 # vsim -c -lib wlib -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L stratixiv_ver -L stratixiv_hssi_ver -L stratixiv_pcie_hip_ver -t 1ps -wlf func.wlf -quiet opt_hp_tb 
-# Start time: 18:50:07 on Mar 15,2023
+# Start time: 13:47:34 on Apr 14,2023
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (4) for port 'msel'. The port definition is at: /home/sescer/quartus_projects/fpga/src/hp.sv(81).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst File: /home/sescer/quartus_projects/fpga/sim/hp/src/hp_tb.sv Line: 69
 # ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reconfig_rst_reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/pcie_avmm.v(98).
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst File: /home/sescer/quartus_projects/fpga/src/pcie.sv Line: 63
 # ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (1) for port 'RxStEmpty_i'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/altpciexpav_stif_app.v(97).
@@ -85,7 +87,27 @@ sim
 # ** Warning: (vsim-3015) [PCDPC] - Port size (80) does not match connection size (20) for port 'dout'. The port definition is at: /opt/intelFPGA/18.1/quartus/eda/sim_lib/cyclonev_hssi_atoms.v(6899).
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/pcie/pcie_avmm_inst/pcie_cv_hip_avmm_0/c5_hip_ast/altpcie_av_hip_ast_hwtcl/altpcie_av_hip_128bit_atom/g_pcie_xcvr/genblk1/av_xcvr_pipe_native_hip/inst_av_xcvr_native/inst_av_pma/genblk1/av_rx_pma/rx_pmas[0]/rx_pma/rx_pma_deser File: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/submodules/av_rx_pma.sv Line: 285
 # ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'in'. The port definition is at: /home/sescer/quartus_projects/fpga/lib/common/pf.sv(11).
-#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/rst_pf File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 140
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/rst_pf File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 194
+# ** Warning: (vsim-3015) [PCDPC] - Port size (16) does not match connection size (17) for port 'page_number'. The port definition is at: /home/sescer/quartus_projects/fpga/src/page_selector.sv(14).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/test File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 203
+# ** Warning: (vsim-3015) [PCDPC] - Port size (10) does not match connection size (9) for port 'start_addr'. The port definition is at: /home/sescer/quartus_projects/fpga/src/load_controller.sv(17).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/ctr File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 230
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/page_controller.sv(12).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/hps_wrapper/bar_mem File: /home/sescer/quartus_projects/fpga/src/hps_wrapper.sv Line: 189
+# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/page_controller.sv(12).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/hps_wrapper/loader_mem File: /home/sescer/quartus_projects/fpga/src/hps_wrapper.sv Line: 192
+# ** Warning: (vsim-3839) Variable '/hp_tb/hp_inst/start_addr', driven via a port connection, is multiply driven. See /home/sescer/quartus_projects/fpga/src/hp.sv(230).
+#    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 224
+# ** Error: Unable to lock WLF file "func.wlf". Retrying 1 times, errno 11
+# ** Error: Unable to lock WLF file "func.wlf". Retrying 2 times, errno 11
+# ** Error: Unable to lock WLF file "func.wlf". Retrying 3 times, errno 11
+# ** Error: Cannot lock WLF file: "func.wlf"
+#           errno 11: Resource temporarily unavailable.
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: func.wlf
+#           File in use by: sescer  Hostname: mypc  ProcessID: 672119
+#           Attempting to use alternate WLF file "./wlftvfabHj".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: func.wlf
+#           Using alternate file: ./wlftvfabHj
 # Info: =================================================
 # Info:           Generic PLL Summary
 # Info: =================================================
@@ -410,6 +432,22 @@ sim
 # VERIFICATION START
 #         512 bytes,           0 Kb,           0 Mb
 # VERIFIED
-# ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(137)
-#    Time: 163088010 ps  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
-# Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 137
+# COPY START
+# COPYED
+# loader sr: ready(         1), error(         0), start(         0)
+# LOAD START
+#        4096 bytes,           4 Kb,           0 Mb
+# LOADED
+# loader sr: ready(         1), error(         0), start(         0)
+# ERROR TEST START
+# ERROR read byte           0(00) bit           2: actual 1 expected 0
+#        4096 bytes,           4 Kb,           0 Mb
+# ERROR TESTED
+# loader sr: ready(         0), error(         1), start(         0)
+# LOAD START
+#        4096 bytes,           4 Kb,           0 Mb
+# LOADED
+# loader sr: ready(         1), error(         0), start(         0)
+# ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(255)
+#    Time: 1028928 ns  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
+# Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 255

@@ -4,7 +4,7 @@ module page_selector // RM BYTEEN
 	parameter  DW         = 64,
 	parameter  MAX_BURST  = 1,
 	parameter  PAGE_COUNT = 4,
-	localparam PCW		  = $clog2(PAGE_COUNT)
+	parameter  PCW		  = $clog2(PAGE_COUNT)
 )
 (
 	input logic clock,
@@ -14,19 +14,19 @@ module page_selector // RM BYTEEN
 	output logic [PCW-1:0] page_number
 );	
 	localparam BCW 			= $clog2(MAX_BURST);
-	localparam UNUSED_BITS  = $clog2(DW/8);
 	
-	typedef enum logic [AW - 1:0] {
-		 SR     		= 8'h00,
-		 CR     		= 8'h04,
-		 CR_S   		= 8'h08,
-		 CR_C   		= 8'h0C,
-		 PAGE_NUM       = 8'h10
+    typedef logic [AW - 1:0] addr_t;
+	typedef enum addr_t {
+		 SR     		= addr_t'(8'h00),
+		 CR     		= addr_t'(8'h04),
+		 CR_S   		= addr_t'(8'h08),
+		 CR_C   		= addr_t'(8'h0C),
+		 PAGE_NUM       = addr_t'(8'h10)
 	} regs_t;
 
 	enum {IDLE, READ, WRITE} state, next_state;
 		
-	logic [AW - UNUSED_BITS - 1:0]	reg_addr = 'h0;
+	logic [AW - 1:0]                reg_addr = 'h0;
 	
     logic [BCW-1:0] 				cnt 	 = 'h0;
 	logic [BCW-1:0] 				bus_cnt  = 'h0;
@@ -63,8 +63,8 @@ module page_selector // RM BYTEEN
 					reg_addr    <= bus.address;
 				end
 			READ: begin
-				cnt 	    <= cnt+1;
-				reg_addr    <= reg_addr+DW/8;
+				cnt 	    <= cnt+'h1;
+				reg_addr    <= reg_addr+DW/'h8;
 			end
 			WRITE: 
 				if(bus.write) begin
@@ -75,8 +75,8 @@ module page_selector // RM BYTEEN
 						PAGE_NUM: 	page_number <= bus.writedata;
 						default: ;
 					endcase
-					cnt 		<= cnt+1;
-					reg_addr    <= reg_addr+DW/8;
+					cnt 		<= cnt+'h1;
+					reg_addr    <= reg_addr+DW/'h8;
 				end
 			endcase
 		end

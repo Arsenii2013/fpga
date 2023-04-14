@@ -20,11 +20,43 @@
 					"strict" : false
 				},
 				{
+					"name" : "n_config",
+					"strict" : false
+				},
+				{
+					"name" : "dclk",
+					"strict" : false
+				},
+				{
+					"name" : "data",
+					"strict" : false
+				},
+				{
+					"name" : "msel[0]",
+					"strict" : false
+				},
+				{
+					"name" : "msel[1]",
+					"strict" : false
+				},
+				{
+					"name" : "n_ce",
+					"strict" : false
+				},
+				{
 					"name" : "sysclk",
 					"strict" : false
 				},
 				{
 					"name" : "pci_perst_n",
+					"strict" : false
+				},
+				{
+					"name" : "n_status",
+					"strict" : false
+				},
+				{
+					"name" : "conf_done",
 					"strict" : false
 				}
 			]

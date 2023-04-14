@@ -53,7 +53,17 @@ localparam MMR_DDSC0       = MMR_MFMC  + 1;
 localparam MMR_DDSC1       = MMR_DDSC0 + 1;
 localparam MMR_DDSC2       = MMR_DDSC1 + 1;
 localparam MMR_DDSC3       = MMR_DDSC2 + 1;
-localparam MMR_DEV_COUNT   = MMR_DDSC3 + 1;
+localparam MMR_PAGE_N      = MMR_DDSC3 + 1; // page number
+localparam MMR_LOAD        = MMR_PAGE_N + 1; // load control
+localparam MMR_DEV_COUNT   = MMR_LOAD + 1;
+
+//------------------------------------------------
+//
+//      SDRAM parameters
+//
+localparam SDRAM_DW        = 64;
+localparam SDRAM_AW        = 32;
+localparam SDRAM_OFFSET    = 32'h4000_0000;
 
 endpackage : hp_pkg
 
