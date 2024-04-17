@@ -18,7 +18,6 @@ module iv_loader
     input  logic                 conf_done_async,
     inout  wire                  dclk_tri,
     inout  wire                  data_tri,
-    inout  wire                  n_ce_tri,
     inout  wire  [3:0]           msel_tri,
     
     input  logic                 start,
@@ -56,14 +55,12 @@ module iv_loader
     logic                 n_config;
     logic                 dclk;
     logic                 data;
-    logic                 n_ce;
     logic [3:0]           msel;
     
     
     assign n_config_tri = (state == WRITING) ? n_config : 1'bz;
     assign dclk_tri     = (state == WRITING) ? dclk     : 1'bz;
     assign data_tri     = (state == WRITING) ? data     : 1'bz;
-    assign n_ce_tri     = (state == WRITING) ? n_ce     : 1'bz;
     assign msel_tri     = (state == WAIT_MSEL || state == WRITING) ? msel     : 4'bz;
     
     assign delay_start  = (state == WRITING) && start;
@@ -108,7 +105,6 @@ module iv_loader
         conf_done,
         dclk,
         data,
-        n_ce,
         msel,
         
         word,

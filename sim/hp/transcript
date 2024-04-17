@@ -17,7 +17,7 @@
 # hexadecimal
 sim
 # vsim -c -lib wlib -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L stratixiv_ver -L stratixiv_hssi_ver -L stratixiv_pcie_hip_ver -t 1ps -wlf func.wlf -quiet opt_hp_tb 
-# Start time: 13:47:34 on Apr 14,2023
+# Start time: 09:56:11 on Apr 19,2023
 # ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (4) for port 'msel'. The port definition is at: /home/sescer/quartus_projects/fpga/src/hp.sv(81).
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst File: /home/sescer/quartus_projects/fpga/sim/hp/src/hp_tb.sv Line: 69
 # ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'reconfig_rst_reset'. The port definition is at: /home/sescer/quartus_projects/fpga/src/gen/pcie_avmm/simulation/pcie_avmm.v(98).
@@ -98,16 +98,6 @@ sim
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst/hps_wrapper/loader_mem File: /home/sescer/quartus_projects/fpga/src/hps_wrapper.sv Line: 192
 # ** Warning: (vsim-3839) Variable '/hp_tb/hp_inst/start_addr', driven via a port connection, is multiply driven. See /home/sescer/quartus_projects/fpga/src/hp.sv(230).
 #    Time: 0 ps  Iteration: 0  Instance: /hp_tb/hp_inst File: /home/sescer/quartus_projects/fpga/src/hp.sv Line: 224
-# ** Error: Unable to lock WLF file "func.wlf". Retrying 1 times, errno 11
-# ** Error: Unable to lock WLF file "func.wlf". Retrying 2 times, errno 11
-# ** Error: Unable to lock WLF file "func.wlf". Retrying 3 times, errno 11
-# ** Error: Cannot lock WLF file: "func.wlf"
-#           errno 11: Resource temporarily unavailable.
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: func.wlf
-#           File in use by: sescer  Hostname: mypc  ProcessID: 672119
-#           Attempting to use alternate WLF file "./wlftvfabHj".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: func.wlf
-#           Using alternate file: ./wlftvfabHj
 # Info: =================================================
 # Info:           Generic PLL Summary
 # Info: =================================================
@@ -449,5 +439,8 @@ sim
 # LOADED
 # loader sr: ready(         1), error(         0), start(         0)
 # ** Note: $stop    : /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv(255)
-#    Time: 1028928 ns  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
+#    Time: 1029232 ns  Iteration: 0  Instance: /hp_tb/bfm_rp_inst/altpcie_tbed_sv_hwtcl_inst/g_bfm_top_rp/altpcietb_bfm_top_rp/genblk1/drvr
 # Break in NamedBeginStat main at /home/sescer/quartus_projects/fpga/sim/hp/src/pcie_rp/altpcietb_bfm_driver_avmm.sv line 255
+add wave -position end  sim:/hp_tb/sysclk
+# End time: 20:25:51 on Apr 21,2023, Elapsed time: 58:29:40
+# Errors: 0, Warnings: 40

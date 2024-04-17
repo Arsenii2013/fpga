@@ -12,7 +12,7 @@
   </columns>
  </systemtable>
  <library expandedCategories="Project,Library" />
- <window width="962" height="1082" x="-2" y="0" />
+ <window width="1922" height="1080" x="-1" y="1" />
  <generation
    block_symbol_file="0"
    path="/home/sescer/quartus_projects/fpga/src/gen/_PROJECT_NAME_" />

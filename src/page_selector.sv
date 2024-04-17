@@ -1,4 +1,4 @@
-module page_selector // RM BYTEEN
+module page_selector
 #(
 	parameter  AW         = 16,
 	parameter  DW         = 64,

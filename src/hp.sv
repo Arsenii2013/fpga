@@ -278,7 +278,6 @@ loader
     .conf_done_async(conf_done),
     .dclk_tri(dclk),
     .data_tri(data),
-    .n_ce_tri(n_ce),
     .msel_tri({unused, msel}),
     
     

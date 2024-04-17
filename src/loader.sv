@@ -9,7 +9,6 @@ module loader
     input  logic          conf_done,
     output logic          dclk,
     output logic          data,
-    output logic          n_ce,
     output logic [3:0]    msel,
     
     input  logic [DW-1:0] word,
@@ -25,7 +24,7 @@ module loader
 );
     localparam BITDW  = $clog2(DW);
     
-    enum {ERROR, IDLE, STARTING, WRITING, WORD_WRITED, ERROR_OCCURED, FINISHED} state = IDLE, next_state = IDLE;
+    enum {IDLE, ERROR, STARTING, WRITING, WORD_WRITED, ERROR_OCCURED, FINISHED} state = IDLE, next_state;
     
     logic [BITDW-1:0]  bit_number  = 0;
     logic starter_enable;
@@ -38,7 +37,6 @@ module loader
         n_status,
         conf_done,
         msel,
-        n_ce,
     
         starter_enable,
         starter_error,

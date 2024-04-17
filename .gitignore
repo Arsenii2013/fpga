@@ -34,3 +34,6 @@ transcript
 *.bak
 *.err
 *.ver
+*.rdb
+*.cdb
+syn/hp/incremental_db
